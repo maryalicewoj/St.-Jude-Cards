@@ -1,5 +1,23 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <script>
+
+	// test
+	function writeMessage(canvas, message) {
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.font = '18pt Calibri';
+        context.fillStyle = 'black';
+        context.fillText(message, 10, 25);
+      }
+	function getMousePos(canvas, evt) {
+	debugger;
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+     
     function draw(/*variable for where mouse is*/) {
         /*
         var mousepoint=getMousePos() // i don't think this just gets the canvas, I think that some math may have to be done to get the canvas
@@ -9,7 +27,7 @@
         var b_canvas = document.getElementById("b");
         var b_context = b_canvas.getContext("2d");
         //don't know why i need the above variable, but supposable I do
-        fillRect(x, y, 1, 1)
+        fillRect(x, y, 1, 1);
         //width and heigth could be changed based on how big the user wants the marker, it could be passed as a parameter
         
         */
@@ -59,7 +77,16 @@ background-color:#ffffff;
 </body>
 </html>
 
+<<<<<<< HEAD
 <script><canvas id="canvas" width="80%" height="50%">context = document.getElementById('canvasInAPerfectWorld').getContext("2d");</canvas></script>
+=======
+<!--need var for where mouse is... I put it up at top, is that okay?-->
+<!--does the draw() function need to be in a loop -->
+<canvas id="Drawing" <!--add style= postition-->  <!-- <-- make shift --- this is not right !!! width=80% height=50%-->
+style="border:1px dashed #000000;">
+<!-- can't make canvas the right size!! syntax also weird above -->
+ </canvas>
+>>>>>>> 33a8d46cb9de72f1408cf2e99ee392d6a9304e31
 
 
 
@@ -70,7 +97,19 @@ background-color:#ffffff;
 </font>
 
 </body>
+<script>
+ var canvas = document.getElementById('Drawing');
+		canvas.width = 500;
+		canvas.height = 500;
+      var context = canvas.getContext('2d');
 
+      canvas.addEventListener('mousemove', function(evt) {
+	  debugger;
+        var mousePos = getMousePos(canvas, evt);
+        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        writeMessage(canvas, message);
+      }, false);
+</script>
 </html>
 
 
