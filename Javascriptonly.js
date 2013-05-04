@@ -1,24 +1,49 @@
 var canvas = document.getElementById('Drawing');
+var paint = false;
+var context = canvas.getContext('2d');
+
+var clickX = new Array();
+var clickY = new Array();
+var clickDrag = new Array();
+
+context.fillStyle = (255, 255, 255, 0.5);
 canvas.width = 500;
 canvas.height = 500;
-var context = canvas.getContext('2d');
 
 canvas.addEventListener('mousemove', function (evt) {
     var mousePos = getMousePos(canvas, evt);
     var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
 
-    draw(context, mousePos.x, mousePos.y);
+    if (paint) {
+        addClick(mousePos.x, mousePos.y);
+        redraw();
+    }
 
-    writeMessage(canvas, message);
+    //writeMessage(canvas, message);
 }, false);
 
-function writeMessage(canvas, message) {
-    var context = canvas.getContext('2d');
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.font = '18pt Calibri';
-    context.fillStyle = 'black';
-    context.fillText(message, 10, 25);
-}
+canvas.addEventListener('mousedown', function (evt) {
+    paint = true;
+    var mousePos = getMousePos(canvas, evt);
+    addClick(mousePos.x, mousePos.y);
+    redraw();
+}, false);
+
+canvas.addEventListener('mouseup', function (evt) {
+    paint = false;
+}, false);
+
+canvas.addEventListener('mouseleave', function (evt) {
+    paint = false;
+}, false);
+
+//function writeMessage(canvas, message) {
+//    var context = canvas.getContext('2d');
+//    context.clearRect(0, 0, canvas.width, canvas.height);
+//    context.font = '18pt Calibri';
+//    context.fillStyle = 'black';
+//    context.fillText(message, 10, 25);
+//}
 
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
@@ -28,13 +53,27 @@ function getMousePos(canvas, evt) {
     };
 }
 
-function draw(context, x, y) {
-    //context.fillRect(x, y, 5, 5);
-    context.lineWidth = 1;
-    context.beginPath();
-    context.stroke();
-    //width and heigth could be changed based on how big the user wants the marker, it could be passed as a parameter
+function addClick(x, y, dragging) {
+    clickX.push(x);
+    clickY.push(y);
+    clickDrag.push(dragging)
+}
 
-    //turn pixel location (variable) black
-    // do I need to be constantly checking for mousemove
+function redraw() {
+    canvas.width = canvas.width; //clears the canvas
+    context.strokeStyle = "#df4b26";
+    context.lineJoin = "round";
+    context.lineWidth = 5;
+
+    for (var i = 0; i < clickX.length; i++) {
+        context.beginPath();
+        if (clickDrag[i] && i) {
+            context.moveTo(clickX[i - 1], clickY[i - 1]);
+        } else {
+            context.moveTo(clickX[i] - 1, clickY[i]);
+        }
+        context.lineTo(clickX[i], clickY[i]);
+        context.closePath();
+        context.stroke();
+    }
 }
