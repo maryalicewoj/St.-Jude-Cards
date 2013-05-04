@@ -59,25 +59,8 @@ background-color:#ffffff;
 </body>
 </html>
 
-<!--need var for where mouse is... I put it up at top, is that okay?-->
-<!--does the draw() function need to be in a loop -->
-<canvas id="Drawing" <!--add style= postition--> onmousemove=“draw()” <!-- <-- make shift --- this is not right !!! width=80% height=50%-->
-style="border:1px dashed #000000;">
-<!-- can't make canvas the right size!! syntax also weird above -->
-canvas.width = 2000;
-canvas.height = 1000; </canvas>
+<script><canvas id="canvas" width="80%" height="50%">context = document.getElementById('canvasInAPerfectWorld').getContext("2d");</canvas></script>
 
-
-
-
-
-<head>
-<style type='text/css'>
-<!-- the div below never ends, what is up with that  -->
-div {position:absolute;left:0px;top:0px;width:100%;height:100%;}
-</style>
-</head>
-<body>
 
 
 
