@@ -58,8 +58,8 @@ a:active {color:#0000FF;}  /* selected link */
 
 <body>
 
-<font face="Comic Sans MS, cursive"><div align="center"><b>Welcome!</b></div> 
-<div align=center>
+<font face="Arial, cursive"><div align="center"><b>Welcome!</b></div> 
+<div align="left">
 <html>
 <head>
 <style>
@@ -69,26 +69,37 @@ list-style-type:none;
 margin:0;
 padding:0;
 }
-a
+a:link,a:visited
 {
 display:block;
-width:60px;
-background-color:#ffffff;
+font-weight:bold;
+color:#FFFFFF;
+background-image:url('PLACEHOLDER.GIF');
+background-color:#C8C8C8;
+width:120px;
+text-align:center;
+padding:4px;
+text-decoration:none;
+text-transform:uppercase;
+}
+a:hover,a:active
+{
+background-image:url('PLACEHOLDER.GIF');
+background-color:#989898;
 }
 </style>
 </head>
 
-<div align="left">
 <body>
 <ul>
 <li><a href="#home">Home</a></li>
 <li><a href="#help">Help</a></li>
 <li><a href="#cards">Cards</a></li>
-</ul></div>
+</ul>
 </body>
 </html>
-
-
+</div>
+<div align=center>
 <!--need var for where mouse is... I put it up at top, is that okay?-->
 <!--does the draw() function need to be in a loop -->
 <canvas id="Drawing" width="80%" height="50%">
