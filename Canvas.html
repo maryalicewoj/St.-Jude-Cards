@@ -95,8 +95,7 @@ background-color:#989898;
 <div align=center>
 <!--need var for where mouse is... I put it up at top, is that okay?-->
 <!--does the draw() function need to be in a loop -->
-<<<<<<< HEAD
-<canvas id="Drawing" style="visibility:hidden" width="80%" height="50%" <!--add style= postition-->  -->
+<canvas id="Drawing"  width="80%" height="50%" <!--add style= postition-->  
 style="border:1px dashed #000000;"> 
 <!-- can't make canvas the right size!! syntax also weird above -->
  </canvas>
@@ -107,8 +106,7 @@ style="border:1px dashed #000000;">
 </body>
 <script>
  var canvas = document.getElementById('Drawing');
-		canvas.width = 500;
-		canvas.height = 500;
+		canvas.fillstyle=(255,255,255,0.5)
       var context = canvas.getContext('2d');
 
       canvas.addEventListener('mousemove', function(evt) {
