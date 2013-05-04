@@ -2,6 +2,7 @@
 <script>
 
 	// test
+	
 	function writeMessage(canvas, message) {
         var context = canvas.getContext('2d');
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -9,6 +10,7 @@
         context.fillStyle = 'black';
         context.fillText(message, 10, 25);
       }
+	  
 	function getMousePos(canvas, evt) {
 	debugger;
         var rect = canvas.getBoundingClientRect();
@@ -18,19 +20,10 @@
         };
       }
      
-    function draw(/*variable for where mouse is*/) {
-        /*
-        var mousepoint=getMousePos() // i don't think this just gets the canvas, I think that some math may have to be done to get the canvas
-        splice mousepoint for x and y coordinates
-        var x= x coordinate;
-        var y = y coordinate;
-        var b_canvas = document.getElementById("b");
-        var b_context = b_canvas.getContext("2d");
-        //don't know why i need the above variable, but supposable I do
-        fillRect(x, y, 1, 1);
+    function draw(context, x, y) {
+		context.fillRect(x, y, 5, 5);
         //width and heigth could be changed based on how big the user wants the marker, it could be passed as a parameter
-        
-        */
+		
         //turn pixel location (variable) black
         // do I need to be constantly checking for mousemove
     }
@@ -79,8 +72,8 @@ background-color:#ffffff;
 
 <!--need var for where mouse is... I put it up at top, is that okay?-->
 <!--does the draw() function need to be in a loop -->
-<canvas id="Drawing" <!--add style= postition-->  <!-- <-- make shift --- this is not right !!! width=80% height=50%-->
-style="border:1px dashed #000000;">
+<canvas id="Drawing" style="visibility:hidden" <!--add style= postition-->  <!-- <-- make shift --- this is not right !!! width=80% height=50%-->
+style="border:1px dashed #000000;"> 
 <!-- can't make canvas the right size!! syntax also weird above -->
  </canvas>
 
@@ -114,6 +107,8 @@ div {position:absolute;left:0px;top:0px;width:100%;height:100%;}
 	  debugger;
         var mousePos = getMousePos(canvas, evt);
         var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+		draw(context, mousePos.x, mousePos.y);
+		
         writeMessage(canvas, message);
       }, false);
 </script>
