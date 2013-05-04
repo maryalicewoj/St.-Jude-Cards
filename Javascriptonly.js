@@ -11,11 +11,11 @@ canvas.width = 500;
 canvas.height = 500;
 
 canvas.addEventListener('mousemove', function (evt) {
-    var mousePos = getMousePos(canvas, evt);
-    var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+    //var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
 
     if (paint) {
-        addClick(mousePos.x, mousePos.y);
+        var mousePos = getMousePos(canvas, evt);
+        addClick(mousePos.x, mousePos.y, true);
         redraw();
     }
 
@@ -23,8 +23,8 @@ canvas.addEventListener('mousemove', function (evt) {
 }, false);
 
 canvas.addEventListener('mousedown', function (evt) {
-    paint = true;
     var mousePos = getMousePos(canvas, evt);
+    paint = true;
     addClick(mousePos.x, mousePos.y);
     redraw();
 }, false);
