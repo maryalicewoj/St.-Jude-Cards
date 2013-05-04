@@ -1,60 +1,58 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
+﻿<!-- IE in quirks mode -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<title>Fixed left-sidebar and right-sidebar</title>
 <style>
-a:link {color:#0000FF;}    /* unvisited link */
-a:visited {color:#000066;} /* visited link */
-a:hover {color:#3366FF;}   /* mouse over link */
-a:active {color:#0000FF;}  /* selected link */
+body
+{
+background-image:url('http://i43.tinypic.com/35bwcv8.png');
+background-repeat:no-repeat;
+background-position:center top;
+}
 </style>
-</head>
-</html>
-
-<script>
-
-	// test
-	
-	function writeMessage(canvas, message) {
-        var context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.font = '18pt Calibri';
-        context.fillStyle = 'black';
-        context.fillText(message, 10, 25);
-      }
-	  
-	function getMousePos(canvas, evt) {
-	debugger;
-        var rect = canvas.getBoundingClientRect();
-        return {
-          x: evt.clientX - rect.left,
-          y: evt.clientY - rect.top
-        };
-      }
-     
-    function draw(context, x, y) {
-		context.fillRect(x, y, 5, 5);
-        //width and heigth could be changed based on how big the user wants the marker, it could be passed as a parameter
-		
-        //turn pixel location (variable) black
-        // do I need to be constantly checking for mousemove
-    }
-</script> 
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<title>Make a Card for St.Jude</title>
-
-</head>
-
-<body>
-
-<font face="Arial, cursive"><div align="center"><b>Welcome!</b></div> 
-<div align="left">
-<html>
-<head>
+<link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+<style>
+#main a:link {color:#0000FF;}    /* unvisited link */
+#main a:visited {color:#000066;} /* visited link */
+#main a:hover {color:#3366FF;}   /* mouse over link */
+a:active {color:#0000FF;}  /* selected link */ 
+</style>
+<style type="text/css">
+ body{
+  margin:0;
+  padding:0 right-sidebar-<length> 0 left-sidebar-<length>;
+ }
+ div#left-sidebar{
+  position:absolute;
+  top:0;
+  left:0;
+  width:left-sidebar-<length>;
+  height:100%;
+ }
+ div#right-sidebar{
+  position:absolute;
+  top:0;
+  right:0;
+  width:right-sidebar-<length>;
+  height:100%;
+ }
+ @media screen{
+  body>div#left-sidebar{
+   position:fixed;
+  }
+  body>div#right-sidebar{
+   position:fixed;
+  }
+ }
+ * html body{
+  overflow:hidden;
+ } 
+ * html div#content{
+  height:100%;
+  overflow:auto;
+ }
+</style>
+<div id="left-sidebar"><html>
+<img src="http://i41.tinypic.com/2wd98vs.jpg" border="0" alt="Image and video hosting by TinyPic">
 <style>
 ul
 {
@@ -68,64 +66,68 @@ display:block;
 font-weight:bold;
 color:#FFFFFF;
 background-image:url('PLACEHOLDER.GIF');
-background-color:#C8C8C8;
+background-color:#B0B0B0;
 width:120px;
 text-align:center;
 padding:4px;
 text-decoration:none;
+text-spacing:8px;
 text-transform:uppercase;
 }
 a:hover,a:active
 {
 background-image:url('PLACEHOLDER.GIF');
-background-color:#989898;
+background-color:#A20033;
+text-decoration:none;
 }
 </style>
 </head>
-
-<body>
 <ul>
 <li><a href="#home">Home</a></li>
 <li><a href="#help">Help</a></li>
 <li><a href="#cards">Cards</a></li>
 </ul>
-</body>
-</html>
 </div>
-<div align=center>
-<!--need var for where mouse is... I put it up at top, is that okay?-->
-<!--does the draw() function need to be in a loop -->
-<<<<<<< HEAD
-<canvas id="Drawing" style="visibility:hidden" width="80%" height="50%" <!--add style= postition-->  -->
-style="border:1px dashed #000000;"> 
-<!-- can't make canvas the right size!! syntax also weird above -->
- </canvas>
-<br>
+<div align=center></font>
+</font></div><!--LEFT SIDEBAR--></div>
+<div id="right-sidebar"> right-sidebar <!--RIGHT SIDEBAR--></div>
+<div id="content">
+<br><br><br><br><br>
+<font face="Arial"><div align="center"><font color=#606060><h3>MAKE A CARD FOR ST. JUDE</h3></div></font></font>
+<div align="left"></div>
+<br><br><br><br><br>
+<style>
+body {
+	color: #ccc;
+	font-family: Arial, sans-serif;
+	font-size: 100%;
+	font-weight: bold;	
+    text-align: center;
+}
+.one.inner {
+    width: 50%;
+    height: 50%;
+    line-height: 10em;
+    background: #ffffff;
+ 
+    border-radius: 1em;
+}
+ 
+.one.outer {
+	display: inline-block;
+    background: #A20033;
+ 
+    padding: 1em;
+    border-radius: 2em;
+}
+</style>
 
-</font>
+<div class="one outer">
+    <div class="one inner">
+JAVA</div></font> 
+    </div><!--/ inner-->
+</div><!--/ outer-->
 
-</body>
-<script>
- var canvas = document.getElementById('Drawing');
-		canvas.width = 500;
-		canvas.height = 500;
-      var context = canvas.getContext('2d');
-
-      canvas.addEventListener('mousemove', function(evt) {
-	  debugger;
-        var mousePos = getMousePos(canvas, evt);
-        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-		draw(context, mousePos.x, mousePos.y);
-		
-        writeMessage(canvas, message);
-      }, false);
-</script></div>
-</html>
-
-
-
-
-
-
-
-
+</body><!--CONTENT IN CENTER COLUMN--></div>
+<br><br><br><br><br><br><br><br><br><br>
+<footer><sup><font face="Arial", cursive><font color=#606060><font size=1>Simple HTML Drawing App code Copyright 2010 William Malone (www.williammalone.com)</font></sup></footer>
