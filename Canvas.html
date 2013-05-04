@@ -1,60 +1,24 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
+ 
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Make a Card for St.Jude</title>
+
 <style>
 a:link {color:#0000FF;}    /* unvisited link */
 a:visited {color:#000066;} /* visited link */
 a:hover {color:#3366FF;}   /* mouse over link */
 a:active {color:#0000FF;}  /* selected link */
 </style>
-</head>
-</html>
-
-<script>
-
-	// test
-	
-	function writeMessage(canvas, message) {
-        var context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.font = '18pt Calibri';
-        context.fillStyle = 'black';
-        context.fillText(message, 10, 25);
-      }
-	  
-	function getMousePos(canvas, evt) {
-	debugger;
-        var rect = canvas.getBoundingClientRect();
-        return {
-          x: evt.clientX - rect.left,
-          y: evt.clientY - rect.top
-        };
-      }
-     
-    function draw(context, x, y) {
-		context.fillRect(x, y, 5, 5);
-        //width and heigth could be changed based on how big the user wants the marker, it could be passed as a parameter
-		
-        //turn pixel location (variable) black
-        // do I need to be constantly checking for mousemove
-    }
-</script> 
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<title>Make a Card for St.Jude</title>
 
 </head>
 
 <body>
 
-<font face="Arial, cursive"><div align="center"><b>Welcome!</b></div> 
+<div align="center"><b>Welcome!</b></div> 
 <div align="left">
-<html>
-<head>
 <style>
 ul
 {
@@ -81,43 +45,64 @@ background-image:url('PLACEHOLDER.GIF');
 background-color:#989898;
 }
 </style>
-</head>
 
-<body>
 <ul>
 <li><a href="#home">Home</a></li>
 <li><a href="#help">Help</a></li>
 <li><a href="#cards">Cards</a></li>
 </ul>
-</body>
-</html>
 </div>
-<div align=center>
+<div align="center">
 <!--need var for where mouse is... I put it up at top, is that okay?-->
-<!--does the draw() function need to be in a loop -->
-<canvas id="Drawing"  width="80%" height="50%" <!--add style= postition-->  
-style="border:1px dashed #000000;"> 
+<canvas id="Drawing" width="80%" height="50%" style="border:1px dashed #000000;"> 
 <!-- can't make canvas the right size!! syntax also weird above -->
  </canvas>
-<br>
+<br/>
 
-</font>
+    </div>
 
 </body>
-<script>
+<script type="text/javascript">
  var canvas = document.getElementById('Drawing');
 		canvas.fillstyle=(255,255,255,0.5)
       var context = canvas.getContext('2d');
 
       canvas.addEventListener('mousemove', function(evt) {
-	  debugger;
         var mousePos = getMousePos(canvas, evt);
         var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        
 		draw(context, mousePos.x, mousePos.y);
 		
         writeMessage(canvas, message);
       }, false);
-</script></div>
+
+      function writeMessage(canvas, message) {
+          var context = canvas.getContext('2d');
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.font = '18pt Calibri';
+          context.fillStyle = 'black';
+          context.fillText(message, 10, 25);
+      }
+
+      function getMousePos(canvas, evt) {
+          var rect = canvas.getBoundingClientRect();
+          return {
+              x: evt.clientX - rect.left,
+              y: evt.clientY - rect.top
+          };
+      }
+
+      function draw(context, x, y) {
+          //context.fillRect(x, y, 5, 5);
+          context.lineWidth = 1;
+          context.beginPath();
+          context.stroke();
+          //width and heigth could be changed based on how big the user wants the marker, it could be passed as a parameter
+
+          //turn pixel location (variable) black
+          // do I need to be constantly checking for mousemove
+      }
+</script>
 </html>
 
 
