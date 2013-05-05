@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" /> <!-- reset css -->
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<!--[if lt IE 9]><script type="text/javascript" src="../excanvas.js"></script><![endif]-->
+
+<style>
+    body{ background-color: ivory; }
+    canvas{border:1px solid red;}
+</style>
+
+<script>
+$(function(){
+
+    var canvas=document.getElementById("canvas");
+    var ctx=canvas.getContext("2d");
+    var lastX;
+    var lastY;
+    var strokeColor="red";
+    var strokeWidth=2;
+    var canMouseX;
+    var canMouseY;
+    var canvasOffset=$("#canvas").offset();
+    var offsetX=canvasOffset.left;
+    var offsetY=canvasOffset.top;
+
+
+    function handleMouseDown(e){
+      canMouseX=parseInt(e.clientX-offsetX);
+      canMouseY=parseInt(e.clientY-offsetY);
+      $("#downlog").html("Down: "+ canMouseX + " / " + canMouseY);
+
+      // Put your mousedown stuff here
+      var text=document.getElementById("text").value;
+      ctx.font = 'italic 20px sans-serif';
+      ctx.fillText(text,canMouseX,canMouseY);
+    }
+
+    $("#canvas").mousedown(function(e){handleMouseDown(e);});
+
+}); // end $(function(){});
+</script>
+
+</head>
+
+<body>
+
+
+    <p>Type your message here.</p> 
+    <input id="text" type="text" name="text" value="YOUR MESSAGE HERE"><br>
+    <p>Click on the canvas where you want your message to be inserted.</p>
+    <canvas id="canvas" width=576 height=307></canvas>
+
+</body>
+</html>
