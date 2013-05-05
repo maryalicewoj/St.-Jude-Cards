@@ -1,7 +1,7 @@
 var canvas;
 var paint = false;
 var context;
-
+var urls = [];
 var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
@@ -10,6 +10,7 @@ var strokeColor = "#000000"; //"#df4b26";
 var strokeJoin = "round";
 
 function initCanvasDrawing() {
+    loadList();
     canvas = document.getElementById('Drawing');
     context = canvas.getContext('2d');
     context.fillStyle = (255, 255, 255, 0.5);
@@ -171,15 +172,16 @@ function imageUploaded(evt) {
     saveList();
 }
 
-//Ellie - here is a placeholder array for the urls. You just need to create the push (see imageUploaded), saveList(), and loadList().
-var urls = [];
-
 //This will handle saving the list of urls to storage
 function saveList() {
-
+    debugger;
+    localStorage.cards=urls;
+    alert(urls[0]);
 }
 
 //This will handle loading the list of urls from storage
 function loadList() {
-
+    urls = localStorage.cards
+    if (urls && urls.length > 0)
+        alert(ursl[0]);
 }
