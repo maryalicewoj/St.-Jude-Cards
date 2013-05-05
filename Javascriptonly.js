@@ -214,22 +214,20 @@ function imageUploaded(evt) {
 
 //This will handle saving the list of urls to storage
 function saveList() {
-    debugger;
-    localStorage.cards = urls;
-    alert(urls[0]);
+    localStorage.cards = urls.join(',');
 }
 
 //This will handle loading the list of urls from storage
 function loadList() {
-    debugger;
     urls = !localStorage.cards || localStorage.cards == undefined
         ? []
-        : localStorage.cards;
-
-    if (urls && urls.length > 0)
-        alert(urls[0]);
+        : localStorage.cards.split(',');
 }
 
 function colorSelect(color){
     strokeColor = color;
+}
+
+function widthSelect(width) {
+    strokeWidth = width;
 }
