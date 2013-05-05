@@ -34,7 +34,7 @@ function initCanvasDrawing() {
         paint = false;
 
         for (var i = 0; i < touches.length; i++) {
-            ongoingTouches.splice(i, 1);  // remove it; we're done
+            onGoingTouches.splice(i, 1);  // remove it; we're done
         }
     }
 
@@ -44,7 +44,7 @@ function initCanvasDrawing() {
         for (var i = 0; i < touches.length; i++) {
             var idx = ongoingTouchIndexById(touches[i].identifier);
             addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
-            ongoingTouches.splice(i, 1);  // remove it; we're done
+            onGoingTouches.splice(i, 1);  // remove it; we're done
         }
     }
 
@@ -57,7 +57,7 @@ function initCanvasDrawing() {
         var offset = getCanvasOffset(canvas);
 
         for (var i = 0; i < touches.length; i++) {
-            ongoingTouches.push(touches[i]);
+            onGoingTouches.push(touches[i]);
             addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
             redraw();
         }
@@ -72,10 +72,21 @@ function initCanvasDrawing() {
             for (var i = 0; i < touches.length; i++) {
                 var idx = ongoingTouchIndexById(touches[i].identifier);
                 addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y, true);
-                ongoingTouches.splice(idx, 1, touches[i]);  // swap in the new touch record
+                onGoingTouches.splice(idx, 1, touches[i]);  // swap in the new touch record
                 redraw();
             }
         }
+    }
+
+    function ongoingTouchIndexById(idToFind) {
+        for (var i = 0; i < onGoingTouches.length; i++) {
+            var id = onGoingTouches[i].identifier;
+
+            if (id == idToFind) {
+                return i;
+            }
+        }
+        return -1;    // not found
     }
 
     canvas.addEventListener('mousemove', function (evt) {
