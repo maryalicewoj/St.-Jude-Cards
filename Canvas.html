@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
- 
+<script type="text/javascript" src="Javascriptonly.js"></script>
+     
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -58,11 +59,16 @@ background-color:#989898;
 <!-- can't make canvas the right size!! syntax also weird above -->
  </canvas>
 <br/>
-
+    <input type="button" onclick="saveCanvas();" value="Submit" /> <input type="button" onclick="resetCanvas();" value="Reset" />
+    <br />
+    <a id="url"></a>
     </div>
-
+    
+    
 </body>
-<script type="text/javascript" src="Javascriptonly.js"></script>
+<script type="text/javascript">
+    initCanvasDrawing();
+</script>
 </html>
 
 
