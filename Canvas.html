@@ -4,7 +4,7 @@
 <title>Fixed left-sidebar and right-sidebar</title>
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
- 
+<script type="text/javascript" src="Javascriptonly.js"></script>     
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -14,7 +14,7 @@
 <style>
 body
 {
-background-image:url('http://i43.tinypic.com/35bwcv8.png');
+background-image:url('http://i43.tinypic.com/257hpvq.png');
 background-repeat:no-repeat;
 background-position:center top;
 }
@@ -123,8 +123,8 @@ body {
     text-align: center;
 }
 .one.inner {
-    width: 50%;
-    height: 50%;
+    width: 500;
+    height: 500;
     line-height: 10em;
     background: #ffffff;
  
@@ -139,12 +139,6 @@ body {
     border-radius: 2em;
 }
 </style>
-<div align="center">
-<br/>
-
-    </div>
-
-</body>
 </html>
 
 
@@ -153,9 +147,21 @@ body {
 
 
 <div class="one outer">
-    <div class="one inner"></div></font> 
-   </div><!--/ inner-->
+    <div class="one inner"><canvas id="Drawing" width="80%" height="50%" style="border:0px dashed #000000;"></canvas></div></font><div align="center">
+<br/>
+    <input type="button" onClick="saveCanvas();" value="Submit" /> <input type="button" onClick="resetCanvas();" value="Reset" />
+    <br />
+    <a id="url"></a>
+    </div>
+    
+  
+</body>
+
+</div><!--/ inner-->
 </div><!--/ outer-->
 </body><!--CONTENT IN CENTER COLUMN--></div>
 <br><br><br><br><br><br><br><br><br><br>
 <footer><sup><font face="Arial", cursive><font color=#606060><font size=1>Simple HTML Drawing App code Copyright 2010 William Malone (www.williammalone.com)</font></sup></footer>
+<script type="text/javascript">
+    initCanvasDrawing();
+</script>
