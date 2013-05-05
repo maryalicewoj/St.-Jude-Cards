@@ -5,6 +5,7 @@ var urls = [];
 var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
+var clickColor = new Array();
 var strokeWidth = 5;
 var strokeColor = "#000000"; //"#df4b26";
 var strokeJoin = "round";
@@ -110,15 +111,19 @@ function addClick(x, y, dragging) {
     clickX.push(x);
     clickY.push(y);
     clickDrag.push(dragging)
+    clickColor.push(strokeColor);
+    clickJoin.push(strokeJoin);
+    clickWidth.push(strokeWidth);
 }
 
 function redraw() {
     canvas.width = canvas.width; //clears the canvas
-    context.strokeStyle = strokeColor;
-    context.lineJoin = strokeJoin;
-    context.lineWidth = strokeWidth;
-
+    
     for (var i = 0; i < clickX.length; i++) {
+        context.strokeStyle = clickColor[i];
+        context.lineJoin = clickJoin[i];
+        context.lineWidth = clickWidth[i];
+
         context.beginPath();
         if (clickDrag[i] && i) {
             context.moveTo(clickX[i - 1], clickY[i - 1]);
