@@ -5,6 +5,10 @@ var urls = [];
 var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
+var clickColor = new Array();
+var clickJoin = new Array();
+var clickWidth = new Array();
+var onGoingTouches = new Array();
 var strokeWidth = 5;
 var strokeColor = "#000000"; //"#df4b26";
 var strokeJoin = "round";
@@ -19,46 +23,70 @@ function initCanvasDrawing() {
 
     canvas.addEventListener("touchstart", handleStart, false);
     canvas.addEventListener("touchmove", handleMove, false);
-    //canvas.addEventListener("touchend", handleEnd, false);
-    //canvas.addEventListener("touchcancel", handleCancel, false);
-    //canvas.addEventListener("touchleave", handleLeave, false);
-    //canvas.addEventListener("touchmove", handleMove, false);
+    canvas.addEventListener("touchend", handleEnd, false);
+    canvas.addEventListener("touchcancel", handleCancel, false);
+    canvas.addEventListener("touchleave", handleEnd, false);
+
+    function handleCancel(evt) {
+        evt.preventDefault();
+
+        var touches = evt.changedTouches;
+        paint = false;
+
+        for (var i = 0; i < touches.length; i++) {
+            onGoingTouches.splice(i, 1);  // remove it; we're done
+        }
+    }
+
+    function handleEnd(evt) {
+        var offset = getCanvasOffset(canvas);
+
+        for (var i = 0; i < touches.length; i++) {
+            var idx = ongoingTouchIndexById(touches[i].identifier);
+            addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
+            onGoingTouches.splice(i, 1);  // remove it; we're done
+        }
+    }
 
     function handleStart(evt) {
-        alert('touch');
-        //evt.preventDefault();
+        evt.preventDefault();
+
         paint = true;
 
         var touches = evt.changedTouches;
+        var offset = getCanvasOffset(canvas);
 
         for (var i = 0; i < touches.length; i++) {
-            addClick(touches[i].pageX, touches[i].pageY);
+            onGoingTouches.push(touches[i]);
+            addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
             redraw();
         }
     }
 
     function handleMove(evt) {
-
-        
-
-        var touches = evt.changedTouches;
-
         if (paint) {
-            for (var i = 0; i < touches.length; i++) {
-                
-                ctx.fillStyle = color;
-                ctx.beginPath();
-                ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
-                ctx.lineTo(touches[i].pageX, touches[i].pageY);
-                ctx.closePath();
-                ctx.stroke();
-                ongoingTouches.splice(idx, 1, touches[i]);  // swap in the new touch record
-            }
-            addClick(mousePos.x, mousePos.y, true);
-            redraw();
-        }
+            evt.preventDefault();
 
-        
+            var touches = evt.changedTouches;
+            var offset = getCanvasOffset(canvas);
+            for (var i = 0; i < touches.length; i++) {
+                var idx = ongoingTouchIndexById(touches[i].identifier);
+                addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y, true);
+                onGoingTouches.splice(idx, 1, touches[i]);  // swap in the new touch record
+                redraw();
+            }
+        }
+    }
+
+    function ongoingTouchIndexById(idToFind) {
+        for (var i = 0; i < onGoingTouches.length; i++) {
+            var id = onGoingTouches[i].identifier;
+
+            if (id == idToFind) {
+                return i;
+            }
+        }
+        return -1;    // not found
     }
 
     canvas.addEventListener('mousemove', function (evt) {
@@ -106,19 +134,31 @@ function getMousePos(canvas, evt) {
     };
 }
 
+function getCanvasOffset(canvas) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: rect.left,
+        y: rect.top
+    };
+}
+
 function addClick(x, y, dragging) {
     clickX.push(x);
     clickY.push(y);
     clickDrag.push(dragging)
+    clickColor.push(strokeColor);
+    clickJoin.push(strokeJoin);
+    clickWidth.push(strokeWidth);
 }
 
 function redraw() {
     canvas.width = canvas.width; //clears the canvas
-    context.strokeStyle = strokeColor;
-    context.lineJoin = strokeJoin;
-    context.lineWidth = strokeWidth;
-
+    
     for (var i = 0; i < clickX.length; i++) {
+        context.strokeStyle = clickColor[i];
+        context.lineJoin = clickJoin[i];
+        context.lineWidth = clickWidth[i];
+
         context.beginPath();
         if (clickDrag[i] && i) {
             context.moveTo(clickX[i - 1], clickY[i - 1]);
@@ -181,9 +221,13 @@ function saveList() {
 
 //This will handle loading the list of urls from storage
 function loadList() {
-    urls = localStorage.cards
+    debugger;
+    urls = !localStorage.cards || localStorage.cards == undefined
+        ? []
+        : localStorage.cards;
+
     if (urls && urls.length > 0)
-        alert(ursl[0]);
+        alert(urls[0]);
 }
 
 function colorSelect(color){
