@@ -185,3 +185,7 @@ function loadList() {
     if (urls && urls.length > 0)
         alert(ursl[0]);
 }
+
+function colorSelect(color){
+    strokeColor = color;
+}
