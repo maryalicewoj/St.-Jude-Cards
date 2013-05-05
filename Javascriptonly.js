@@ -181,7 +181,11 @@ function saveList() {
 
 //This will handle loading the list of urls from storage
 function loadList() {
-    urls = localStorage.cards
+    debugger;
+    urls = !localStorage.cards || localStorage.cards == undefined
+        ? []
+        : localStorage.cards;
+
     if (urls && urls.length > 0)
-        alert(ursl[0]);
+        alert(urls[0]);
 }
