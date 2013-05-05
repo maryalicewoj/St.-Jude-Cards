@@ -1,41 +1,46 @@
-var canvas = document.getElementById('Drawing');
+var canvas;
 var paint = false;
-var context = canvas.getContext('2d');
+var context;
 
 var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
 
-context.fillStyle = (255, 255, 255, 0.5);
-canvas.width = 500;
-canvas.height = 500;
+function initCanvasDrawing() {
+    canvas = document.getElementById('Drawing');
+    context = canvas.getContext('2d');
+    context.fillStyle = (255, 255, 255, 0.5);
+    canvas.width = 500;
+    canvas.height = 500;
 
-canvas.addEventListener('mousemove', function (evt) {
-    //var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+    canvas.addEventListener('mousemove', function (evt) {
+        //var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
 
-    if (paint) {
+        if (paint) {
+            var mousePos = getMousePos(canvas, evt);
+            addClick(mousePos.x, mousePos.y, true);
+            redraw();
+        }
+
+        //writeMessage(canvas, message);
+    }, false);
+
+    canvas.addEventListener('mousedown', function (evt) {
         var mousePos = getMousePos(canvas, evt);
-        addClick(mousePos.x, mousePos.y, true);
+        paint = true;
+        addClick(mousePos.x, mousePos.y);
         redraw();
-    }
+    }, false);
 
-    //writeMessage(canvas, message);
-}, false);
+    canvas.addEventListener('mouseup', function (evt) {
+        paint = false;
+    }, false);
 
-canvas.addEventListener('mousedown', function (evt) {
-    var mousePos = getMousePos(canvas, evt);
-    paint = true;
-    addClick(mousePos.x, mousePos.y);
-    redraw();
-}, false);
+    canvas.addEventListener('mouseleave', function (evt) {
+        paint = false;
+    }, false);
 
-canvas.addEventListener('mouseup', function (evt) {
-    paint = false;
-}, false);
-
-canvas.addEventListener('mouseleave', function (evt) {
-    paint = false;
-}, false);
+}
 
 //function writeMessage(canvas, message) {
 //    var context = canvas.getContext('2d');
@@ -76,4 +81,58 @@ function redraw() {
         context.closePath();
         context.stroke();
     }
+}
+
+//This will reset the canvas and drawing variables
+function resetCanvas() {
+    canvas.width = canvas.width;
+    paint = false;
+    clickX = new Array();
+    clickY = new Array();
+    clickDrag = new Array();
+
+    var test = document.getElementById('url');
+    test.href = null;
+    test.innerText = null;
+}
+
+//This saves the canvas to a PNG and uploads it to the server
+function saveCanvas() {
+    var base64PNG = canvas.toDataURL().split(',')[1];
+    var fd = new FormData();
+    fd.append("base64Image", base64PNG);
+    fd.append("client", "stjudes.demo");
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', imageUploaded, false);
+    xhr.open('POST', 'http://stjudes.mercury.io/upload/');
+    xhr.send(fd);
+}
+
+//This will push the url the server sends back to the list for saving
+function imageUploaded(evt) {
+    var json = JSON.parse(evt.target.response);
+    var url = json.url;
+    var test = document.getElementById('url');
+
+    test.href = url;
+    test.innerText = 'Click here to get your card.';
+
+    alert('Your card has been uploaded.');
+
+    //Ellie - You can use the 'url' variable to push into your list.
+
+    saveList();
+}
+
+//Ellie - here is a placeholder array for the urls. You just need to create the push (see imageUploaded), saveList(), and loadList().
+var urls = [];
+
+//This will handle saving the list of urls to storage
+function saveList() {
+
+}
+
+//This will handle loading the list of urls from storage
+function loadList() {
+
 }
