@@ -5,6 +5,9 @@ var context;
 var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
+var strokeWidth = 5;
+var strokeColor = "#000000"; //"#df4b26";
+var strokeJoin = "round";
 
 function initCanvasDrawing() {
     canvas = document.getElementById('Drawing');
@@ -12,6 +15,50 @@ function initCanvasDrawing() {
     context.fillStyle = (255, 255, 255, 0.5);
     canvas.width = 500;
     canvas.height = 500;
+
+    canvas.addEventListener("touchstart", handleStart, false);
+    canvas.addEventListener("touchmove", handleMove, false);
+    //canvas.addEventListener("touchend", handleEnd, false);
+    //canvas.addEventListener("touchcancel", handleCancel, false);
+    //canvas.addEventListener("touchleave", handleLeave, false);
+    //canvas.addEventListener("touchmove", handleMove, false);
+
+    function handleStart(evt) {
+        alert('touch');
+        //evt.preventDefault();
+        paint = true;
+
+        var touches = evt.changedTouches;
+
+        for (var i = 0; i < touches.length; i++) {
+            addClick(touches[i].pageX, touches[i].pageY);
+            redraw();
+        }
+    }
+
+    function handleMove(evt) {
+
+        
+
+        var touches = evt.changedTouches;
+
+        if (paint) {
+            for (var i = 0; i < touches.length; i++) {
+                
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
+                ctx.lineTo(touches[i].pageX, touches[i].pageY);
+                ctx.closePath();
+                ctx.stroke();
+                ongoingTouches.splice(idx, 1, touches[i]);  // swap in the new touch record
+            }
+            addClick(mousePos.x, mousePos.y, true);
+            redraw();
+        }
+
+        
+    }
 
     canvas.addEventListener('mousemove', function (evt) {
         //var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
@@ -66,9 +113,9 @@ function addClick(x, y, dragging) {
 
 function redraw() {
     canvas.width = canvas.width; //clears the canvas
-    context.strokeStyle = "#df4b26";
-    context.lineJoin = "round";
-    context.lineWidth = 5;
+    context.strokeStyle = strokeColor;
+    context.lineJoin = strokeJoin;
+    context.lineWidth = strokeWidth;
 
     for (var i = 0; i < clickX.length; i++) {
         context.beginPath();
