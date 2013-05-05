@@ -51,7 +51,7 @@ function initCanvasDrawing() {
             var touches = evt.changedTouches;
             var offset = getCanvasOffset(canvas);
             for (var i = 0; i < touches.length; i++) {
-                addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y, true);
+                addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
                 redraw();
             }
         }
