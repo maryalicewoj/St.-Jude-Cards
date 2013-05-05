@@ -5,8 +5,10 @@ var context;
 var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
+var urls = [];
 
 function initCanvasDrawing() {
+    loadList();
     canvas = document.getElementById('Drawing');
     context = canvas.getContext('2d');
     context.fillStyle = (255, 255, 255, 0.5);
@@ -120,19 +122,24 @@ function imageUploaded(evt) {
     alert('Your card has been uploaded.');
 
     //Ellie - You can use the 'url' variable to push into your list.
-
+    urls.push(url);
     saveList();
 }
 
 //Ellie - here is a placeholder array for the urls. You just need to create the push (see imageUploaded), saveList(), and loadList().
-var urls = [];
+
+
 
 //This will handle saving the list of urls to storage
 function saveList() {
-
+localStorage.cards=urls;
+alert(urls[0]);
 }
 
 //This will handle loading the list of urls from storage
 function loadList() {
+urls = localStorage.cards
+if (urls && urls.length>0)
+alert(ursl[0]);
 
 }
