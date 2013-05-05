@@ -1,4 +1,5 @@
 var canvas;
+var carousel;
 var paint = false;
 var context;
 var urls = [];
@@ -14,13 +15,15 @@ var strokeColor = "#000000"; //"#df4b26";
 var strokeJoin = "round";
 
 function initCanvasDrawing() {
-    loadList();
     canvas = document.getElementById('Drawing');
+    carousel = document.getElementById('carousel');
     context = canvas.getContext('2d');
     context.fillStyle = (255, 255, 255, 0.5);
     canvas.width = 500;
     canvas.height = 500;
 
+    loadList();
+    
     canvas.addEventListener("touchstart", handleStart, false);
     canvas.addEventListener("touchmove", handleMove, false);
     canvas.addEventListener("touchend", handleEnd, false);
@@ -200,28 +203,54 @@ function saveCanvas() {
 function imageUploaded(evt) {
     var json = JSON.parse(evt.target.response);
     var url = json.url;
-    var test = document.getElementById('url');
+    var preview = document.getElementById('preview');
 
-    test.href = url;
-    test.innerText = 'Click here to get your card.';
+    preview.addEventListener('click', function () {
+        view(url)
+    }, false);
+    preview.visible = true;
 
     alert('Your card has been uploaded.');
 
     //Ellie - You can use the 'url' variable to push into your list.
+    debugger;
     urls.push(url);
     saveList();
+    appendCarouselSlide(url);
 }
 
 //This will handle saving the list of urls to storage
 function saveList() {
+    debugger;
     localStorage.cards = urls.join(',');
+}
+
+function appendCarouselSlide(url, fragment) {
+    var img = document.createElement('img');
+    img.src = url;
+    img.style = "position: relative;";
+    img.border = "0";
+    img.height = carousel.height;
+    img.addEventListener('click',
+        function () {
+            view(this.src);
+        },
+        false);
+    carousel.appendChild(img);
 }
 
 //This will handle loading the list of urls from storage
 function loadList() {
+    debugger;
+
     urls = !localStorage.cards || localStorage.cards == undefined
         ? []
         : localStorage.cards.split(',');
+
+    carousel.innerHTML = '';
+    
+    for (var i = 0, url; url = urls[i]; i++)
+        appendCarouselSlide(url);
 }
 
 function colorSelect(color){
@@ -230,4 +259,8 @@ function colorSelect(color){
 
 function widthSelect(width) {
     strokeWidth = width;
+}
+
+function view(imgsrc) {
+    var viewwin = window.open(imgsrc, 'view', 'width=500,height=500');
 }
