@@ -181,10 +181,16 @@ function resetCanvas() {
     clickX = new Array();
     clickY = new Array();
     clickDrag = new Array();
+    clickColor = new Array();
+    clickJoin = new Array();
+    clickWidth = new Array();
+    onGoingTouches = new Array();
+    strokeWidth = 5;
+    strokeColor = "#000000"; //"#df4b26";
+    strokeJoin = "round";
 
-    var test = document.getElementById('url');
-    test.href = null;
-    test.innerText = null;
+    var preview = document.getElementById('preview');
+    preview.visible = false;
 }
 
 //This saves the canvas to a PNG and uploads it to the server
@@ -212,8 +218,6 @@ function imageUploaded(evt) {
 
     alert('Your card has been uploaded.');
 
-    //Ellie - You can use the 'url' variable to push into your list.
-    debugger;
     urls.push(url);
     saveList();
     appendCarouselSlide(url);
@@ -221,7 +225,6 @@ function imageUploaded(evt) {
 
 //This will handle saving the list of urls to storage
 function saveList() {
-    debugger;
     localStorage.cards = urls.join(',');
 }
 
@@ -241,8 +244,6 @@ function appendCarouselSlide(url, fragment) {
 
 //This will handle loading the list of urls from storage
 function loadList() {
-    debugger;
-
     urls = !localStorage.cards || localStorage.cards == undefined
         ? []
         : localStorage.cards.split(',');
