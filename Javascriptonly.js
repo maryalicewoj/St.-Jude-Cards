@@ -168,14 +168,14 @@ function imageUploaded(evt) {
     alert('Your card has been uploaded.');
 
     //Ellie - You can use the 'url' variable to push into your list.
-
+    urls.push(url);
     saveList();
 }
 
 //This will handle saving the list of urls to storage
 function saveList() {
     debugger;
-    localStorage.cards=urls;
+    localStorage.cards = urls;
     alert(urls[0]);
 }
 
