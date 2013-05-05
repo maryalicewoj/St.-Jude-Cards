@@ -8,6 +8,7 @@ var clickDrag = new Array();
 var clickColor = new Array();
 var clickJoin = new Array();
 var clickWidth = new Array();
+var onGoingTouches = new Array();
 var strokeWidth = 5;
 var strokeColor = "#000000"; //"#df4b26";
 var strokeJoin = "round";
@@ -22,12 +23,29 @@ function initCanvasDrawing() {
 
     canvas.addEventListener("touchstart", handleStart, false);
     canvas.addEventListener("touchmove", handleMove, false);
-    canvas.addEventListener("touchend", handleStop, false);
-    canvas.addEventListener("touchcancel", handleStop, false);
-    canvas.addEventListener("touchleave", handleStop, false);
+    canvas.addEventListener("touchend", handleEnd, false);
+    canvas.addEventListener("touchcancel", handleCancel, false);
+    canvas.addEventListener("touchleave", handleEnd, false);
 
-    function handleStop(evt) {
+    function handleCancel(evt) {
+        evt.preventDefault();
+
+        var touches = evt.changedTouches;
         paint = false;
+
+        for (var i = 0; i < touches.length; i++) {
+            ongoingTouches.splice(i, 1);  // remove it; we're done
+        }
+    }
+
+    function handleEnd(evt) {
+        var offset = getCanvasOffset(canvas);
+
+        for (var i = 0; i < touches.length; i++) {
+            var idx = ongoingTouchIndexById(touches[i].identifier);
+            addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
+            ongoingTouches.splice(i, 1);  // remove it; we're done
+        }
     }
 
     function handleStart(evt) {
@@ -36,9 +54,10 @@ function initCanvasDrawing() {
         paint = true;
 
         var touches = evt.changedTouches;
-        var offset = getCanvasOffset(canvase);
+        var offset = getCanvasOffset(canvas);
 
         for (var i = 0; i < touches.length; i++) {
+            ongoingTouches.push(touches[i]);
             addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
             redraw();
         }
@@ -51,7 +70,9 @@ function initCanvasDrawing() {
             var touches = evt.changedTouches;
             var offset = getCanvasOffset(canvas);
             for (var i = 0; i < touches.length; i++) {
-                addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
+                var idx = ongoingTouchIndexById(touches[i].identifier);
+                addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y, true);
+                ongoingTouches.splice(idx, 1, touches[i]);  // swap in the new touch record
                 redraw();
             }
         }
