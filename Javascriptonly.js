@@ -6,6 +6,8 @@ var clickX = new Array();
 var clickY = new Array();
 var clickDrag = new Array();
 var clickColor = new Array();
+var clickJoin = new Array();
+var clickWidth = new Array();
 var strokeWidth = 5;
 var strokeColor = "#000000"; //"#df4b26";
 var strokeJoin = "round";
@@ -20,46 +22,39 @@ function initCanvasDrawing() {
 
     canvas.addEventListener("touchstart", handleStart, false);
     canvas.addEventListener("touchmove", handleMove, false);
-    //canvas.addEventListener("touchend", handleEnd, false);
-    //canvas.addEventListener("touchcancel", handleCancel, false);
-    //canvas.addEventListener("touchleave", handleLeave, false);
-    //canvas.addEventListener("touchmove", handleMove, false);
+    canvas.addEventListener("touchend", handleStop, false);
+    canvas.addEventListener("touchcancel", handleStop, false);
+    canvas.addEventListener("touchleave", handleStop, false);
+
+    function handleStop(evt) {
+        paint = false;
+    }
 
     function handleStart(evt) {
-        alert('touch');
-        //evt.preventDefault();
+        evt.preventDefault();
+
         paint = true;
 
         var touches = evt.changedTouches;
+        var offset = getCanvasOffset(canvase);
 
         for (var i = 0; i < touches.length; i++) {
-            addClick(touches[i].pageX, touches[i].pageY);
+            addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
             redraw();
         }
     }
 
     function handleMove(evt) {
-
-        
-
-        var touches = evt.changedTouches;
-
         if (paint) {
-            for (var i = 0; i < touches.length; i++) {
-                
-                ctx.fillStyle = color;
-                ctx.beginPath();
-                ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
-                ctx.lineTo(touches[i].pageX, touches[i].pageY);
-                ctx.closePath();
-                ctx.stroke();
-                ongoingTouches.splice(idx, 1, touches[i]);  // swap in the new touch record
-            }
-            addClick(mousePos.x, mousePos.y, true);
-            redraw();
-        }
+            evt.preventDefault();
 
-        
+            var touches = evt.changedTouches;
+            var offset = getCanvasOffset(canvas);
+            for (var i = 0; i < touches.length; i++) {
+                addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y, true);
+                redraw();
+            }
+        }
     }
 
     canvas.addEventListener('mousemove', function (evt) {
@@ -104,6 +99,14 @@ function getMousePos(canvas, evt) {
     return {
         x: evt.clientX - rect.left,
         y: evt.clientY - rect.top
+    };
+}
+
+function getCanvasOffset(canvas) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: rect.left,
+        y: rect.top
     };
 }
 
@@ -193,4 +196,8 @@ function loadList() {
 
     if (urls && urls.length > 0)
         alert(urls[0]);
+}
+
+function colorSelect(color){
+    strokeColor = color;
 }
