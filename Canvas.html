@@ -1,7 +1,6 @@
-
+﻿
 ﻿<!-- IE in quirks mode -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
-<title>Fixed left-sidebar and right-sidebar</title>
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <script type="text/javascript" src="Javascriptonly.js"></script>     
@@ -108,10 +107,12 @@ text-decoration:none;
 </div>
 <div align=center></font>
 </font></div><!--LEFT SIDEBAR--></div>
-<div id="right-sidebar"> right-sidebar <!--RIGHT SIDEBAR--></div>
+<div id="right-sidebar">
+
+</div>
 <div id="content">
 <br>
-<font face="Arial"><div align="center"><font color=#606060><h3>CURE CARDS</h3></div></font></font>
+<font face="Arial"><div align="center"><font color=#606060><h3>ST. JUDE CARD CREATOR</h3></div></font></font>
 <div align="left"></div>
 <br><br><br><br><br>
 <style>
@@ -147,11 +148,23 @@ body {
 
 
 <div class="one outer">
+<center><input type="image" src="Red.png" onClick="colorSelect('#FF0000'); widthSelect(5);" value="Red" />
+<input type="image" src="Orange.png" onClick="colorSelect('#FF8F45'); widthSelect(5);" value="Orange" />
+<input type="image" src="Yellow.png" onClick="colorSelect('#f5f009'); widthSelect(5);" value="Yellow" />
+<input type="image" src="Green.png" onClick="colorSelect('#19A347'); widthSelect(5);" value="Green" />
+<input type="image" src="Light Blue.png" onClick="colorSelect('#00fffb'); widthSelect(5);" value="Light Blue" />
+<img src="Transparent 32x32.png"><!--Bucket tool if there's time?--></img><br />
+<input type="image" src="Blue.png" onClick="colorSelect('#3d66ff'); widthSelect(5);" value="Blue" />
+<input type="image" src="Purple.png" onClick="colorSelect('#DE7DFF'); widthSelect(5);" value="Purple" />
+<input type="image" src="Pink.png" onClick="colorSelect('#ff3657'); widthSelect(5);" value="Pink" />
+<input type="image" src="Brown.png" onClick="colorSelect('#754719'); widthSelect(5);" value="Brown" />
+<input type="image" src="Black.png" onClick="colorSelect('#000000'); widthSelect(5);" value="Black" />
+<input type="image" src="Eraser.png" onClick="colorSelect('#FFFFFF'); widthSelect(60);" value="Eraser" /></center>
     <div class="one inner"><canvas id="Drawing" width="80%" height="50%" style="border:0px dashed #000000;"></canvas></div></font><div align="center">
 <br/>
     <input type="image" src="Submit.png" onClick="saveCanvas();" value="Submit" /> <input type="image" src="Reset.png" onClick="resetCanvas();" value="Reset" />
     <br />
-    <a id="url"></a>
+    <img id="preview" src="Preview.png" visible="false"/>
     </div>
     
   
@@ -160,18 +173,15 @@ body {
 </div><!--/ inner-->
 </div><!--/ outer-->
 </body><!--CONTENT IN CENTER COLUMN--></div>
-<br><br><br><br><br><br><br><br><br><br>
+<br>
+    <marquee id="carousel" style="position: relative; background-color:#FFFFFF" behavior="scroll" align="center" direction="left" scrollamount="2" scrolldelay="5" onmouseover="this.stop()" onmouseout="this.start()" height="200"><br>
+        <!--<center>
+            <a href="http://www.tkqlhce.com/click-2312720-10463747?URL=http://shop.cafepress.com/design/28001964" target="_blank">
+                <img src="http://www.vegetariansareevil.com/images/eatmeat.jpg" alt="Eat Meat Tee Shirt" title="Tee Shirt " style="position: relative;" border="0">
+            </a><br>
+        </center>-->
+</marquee>
 <footer><sup><font face="Arial", cursive><font color=#606060><font size=1>Simple HTML Drawing App code Copyright 2010 William Malone (www.williammalone.com)</font></sup></footer>
 <script type="text/javascript">
     initCanvasDrawing();
 </script>
-<input type="button" onClick="colorSelect('#FF0000');" value="Red" />
-<input type="button" onClick="colorSelect('#FF8F45';" value="Orange" />
-<input type="button" onClick="colorSelect('#FFFF66');" value="Yellow" />
-<input type="button" onClick="colorSelect('#19A347');" value="Green" />
-<input type="button" onClick="colorSelect('#6666FF');" value="Blue" />
-<input type="button" onClick="colorSelect('#DE7DFF');" value="Purple" />
-<input type="button" onClick="colorSelect('#FFCEFF');" value="Pink" />
-<input type="button" onClick="colorSelect('#754719');" value="Brown" />
-<input type="button" onClick="colorSelect('#000000');" value="Black" />
-<input type="button" onClick="colorSelect('#FFFFFF');" value="White" />
