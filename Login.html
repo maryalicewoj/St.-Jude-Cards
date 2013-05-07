@@ -1,37 +1,43 @@
 <html>
-<form>
+<sup><font face="Arial", cursive><font color=#606060><font size=5>Create an Account</font></sup>
+<form name="input" action="/html_form_action.asp" method="POST">
+	<!--Action sends to server... at the moment to html_form_action.asp.... is this what we want??? -->
+<p>
 First name: <input type="text" name="firstName"><br>
 Last name: <input type="text" name="lastName"><br>
-</form>
-<form>
-Username: <input type="text" name="userName"><br>
-Password: <input type="password" name="pwd">
-</form>
+</p>
 
-<form>
-<input type="radio" name="Sex" value="Female">Female<br>
-<input type="radio" name="Sex" value="Male">Male<br>
-</form>
+<p>
+Username: <input type="text" name="userName"><br>
+Password: <input type="password" name="pwd"><br>
+</p>
+
+<p>
+<input type="radio" name="sex" value="Female">Female<br>
+<input type="radio" name="sex" value="Male">Male<br>
+</p>
 
 <!--Patient or Card Maker-->
-<form>
-<input type="radio" name="Job" value="Patient">Patient<br>
-<input type="radio" name="Job" value="Card Maker">Card Maker<br>
-</form>
+<p>
+<input type="radio" name="job" value="Patient">Patient<br>
+<input type="radio" name="job" value="Card Maker">Card Maker<br>
+</p>
 
 <!--Age Selection *********Only should see if the patient box is checked-->
-<form action="Age">
-<select name="Age">
+<!--Should this be an option, what about that law about users under the age of 13....-->
+<p>
+<!-- Can't seem to put label -->
+<select name="age">
 <option value="0-3">0-3</option>
 <option value="4-7">4-7</option>
 <option value="8-11">8-11</option>
 <option value="12-15">12-15</option>
 <option value="16-19">16-19</option>
 <option value="20+">20+</option>
-</select></form>
+</select>
+</p>
 
 <!--Submit Button -->
-<form name="input" action="html_form_action.asp" method="get">
 <input type="submit" value="Submit">
 </form>
 
