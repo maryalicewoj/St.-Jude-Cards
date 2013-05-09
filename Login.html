@@ -27,7 +27,10 @@ Password: <input type="password" name="pwd"><br>
 <!--Should this be an option, what about that law about users under the age of 13....-->
 <p>
 <!-- Can't seem to put label -->
+<!-- JMH the name is for finding the control and not for labeling.
+    You'll have to add the text in front of the tag for a label. I also suggest a descriptive default like below. -->
 <select name="age">
+<option selected="true" disabled="true">Select your age</option>
 <option value="0-3">0-3</option>
 <option value="4-7">4-7</option>
 <option value="8-11">8-11</option>
