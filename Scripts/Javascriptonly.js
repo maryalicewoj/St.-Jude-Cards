@@ -1,6 +1,7 @@
 var canvas;
 var carousel;
 var paint = false;
+//var eraser = false;
 var context;
 var urls = [];
 var clickX = new Array();
@@ -46,7 +47,8 @@ function initCanvasDrawing() {
 
         for (var i = 0; i < touches.length; i++) {
             var idx = ongoingTouchIndexById(touches[i].identifier);
-            addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
+            var position = getOffsetPosition(canvas, touches[i]);
+            addClick(position);
             onGoingTouches.splice(i, 1);  // remove it; we're done
         }
     }
@@ -57,11 +59,11 @@ function initCanvasDrawing() {
         paint = true;
 
         var touches = evt.changedTouches;
-        var offset = getCanvasOffset(canvas);
 
         for (var i = 0; i < touches.length; i++) {
             onGoingTouches.push(touches[i]);
-            addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y);
+            var position = getOffsetPosition(canvas, touches[i]);
+            addClick(position);
             redraw();
         }
     }
@@ -71,10 +73,11 @@ function initCanvasDrawing() {
             evt.preventDefault();
 
             var touches = evt.changedTouches;
-            var offset = getCanvasOffset(canvas);
+
             for (var i = 0; i < touches.length; i++) {
                 var idx = ongoingTouchIndexById(touches[i].identifier);
-                addClick(touches[i].pageX - offset.x, touches[i].pageY - offset.y, true);
+                var position = getOffsetPosition(canvas, touches[i]);
+                addClick(position, true);
                 onGoingTouches.splice(idx, 1, touches[i]);  // swap in the new touch record
                 redraw();
             }
@@ -93,21 +96,39 @@ function initCanvasDrawing() {
     }
 
     canvas.addEventListener('mousemove', function (evt) {
-        //var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-
         if (paint) {
-            var mousePos = getMousePos(canvas, evt);
-            addClick(mousePos.x, mousePos.y, true);
+            var position = getOffsetPosition(canvas, evt);
+            addClick(position, true);
             redraw();
         }
+        //else if (eraser) {
+        //    debugger;
+        //    var position = getOffsetPosition(canvas, evt);
+        //    var top = Math.max(position.y - 20, 0);
+        //    var bottom = Math.min(position.y + 20, canvas.height);
+        //    var left = Math.max(position.x - 20, 0);
+        //    var right = Math.min(position.x + 20, canvas.width);
 
-        //writeMessage(canvas, message);
+        //    for (var i = clickX.length - 1; i > -1; i--) {
+        //        var x = clickX[i];
+        //        var y = clickY[i];
+        //        if (x >= left
+        //            && x <= right
+        //            && y >= top
+        //            && y <= bottom) {
+        //            debugger;
+        //            clickX.splice(i + 1, 1);
+        //            clickY.splice(i + 1, 1);
+        //        }
+
+        //    }
+        //}
     }, false);
 
     canvas.addEventListener('mousedown', function (evt) {
-        var mousePos = getMousePos(canvas, evt);
+        var position = getOffsetPosition(canvas, evt);
         paint = true;
-        addClick(mousePos.x, mousePos.y);
+        addClick(position);
         redraw();
     }, false);
 
@@ -121,15 +142,7 @@ function initCanvasDrawing() {
 
 }
 
-//function writeMessage(canvas, message) {
-//    var context = canvas.getContext('2d');
-//    context.clearRect(0, 0, canvas.width, canvas.height);
-//    context.font = '18pt Calibri';
-//    context.fillStyle = 'black';
-//    context.fillText(message, 10, 25);
-//}
-
-function getMousePos(canvas, evt) {
+function getOffsetPosition(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     return {
         x: evt.clientX - rect.left,
@@ -137,17 +150,9 @@ function getMousePos(canvas, evt) {
     };
 }
 
-function getCanvasOffset(canvas) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: rect.left,
-        y: rect.top
-    };
-}
-
-function addClick(x, y, dragging) {
-    clickX.push(x);
-    clickY.push(y);
+function addClick(position, dragging) {
+    clickX.push(position.x);
+    clickY.push(position.y);
     clickDrag.push(dragging)
     clickColor.push(strokeColor);
     clickJoin.push(strokeJoin);
@@ -254,9 +259,15 @@ function loadList() {
         appendCarouselSlide(url);
 }
 
-function colorSelect(color){
+function colorSelect(color) {
+    //if (eraser) eraser = false;
     strokeColor = color;
 }
+
+//function eraserSelect() {
+//    eraser = true;
+//    paint = false;
+//}
 
 function widthSelect(width) {
     strokeWidth = width;

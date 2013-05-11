@@ -1,187 +1,102 @@
-﻿
-﻿<!-- IE in quirks mode -->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+﻿﻿<!-- IE in quirks mode -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.0//EN">
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<script type="text/javascript" src="Scripts/Javascriptonly.js"></script>     
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<title>Make a Card for St.Jude</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript" src="Scripts/Javascriptonly.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css' />
+        <link href='Content/Cssonly.css' rel='stylesheet' type='text/css' />
+        <title>Make a Card for St.Jude</title>
+    </head>
 
+    <body> 
+        <div id="left-sidebar">
+            <img src="http://i41.tinypic.com/2wd98vs.jpg" border="0" alt="Image and video hosting by TinyPic ">
 
-<style>
-body
-{
-background-image:url('http://i43.tinypic.com/257hpvq.png');
-background-repeat:no-repeat;
-background-position:center top;
-}
-</style>
-<link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
-<style>
-#main a:link {color:#0000FF;}    /* unvisited link */
-#main a:visited {color:#000066;} /* visited link */
-#main a:hover {color:#3366FF;}   /* mouse over link */
-a:active {color:#0000FF;}  /* selected link */ 
-</style>
-<style type="text/css">
- body{
-  margin:0;
-  padding:0 right-sidebar-<length> 0 left-sidebar-<length>;
- }
- div#left-sidebar{
-  position:absolute;
-  top:0;
-  left:0;
-  width:left-sidebar-<length>;
-  height:100%;
- }
- div#right-sidebar{
-  position:absolute;
-  top:0;
-  right:0;
-  width:right-sidebar-<length>;
-  height:100%;
- }
- @media screen{
-  body>div#left-sidebar{
-   position:fixed;
-  }
-  body>div#right-sidebar{
-   position:fixed;
-  }
- }
- * html body{
-  overflow:hidden;
- } 
- * html div#content{
-  height:100%;
-  overflow:auto;
- }
-</style>
-<div id="left-sidebar"><html>
-<img src="http://i41.tinypic.com/2wd98vs.jpg" border="0" alt="Image and video hosting by TinyPic ">
+            <div align="left"><!--LEFT SIDEBAR-->
+                <br/>
 
-</head>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#help">Help</a></li>
+                    <li><a href="#cards">Cards</a></li>
+                </ul>
+            </div>
+        
+            <div align=center></div>
+        </div>
 
-<body> 
-<div align="left">
-<style>
-ul
-{
-list-style-type:none;
-margin:0;
-padding:0;
-}
-a:link,a:visited
-{
-display:block;
-font-weight:bold;
-color:#FFFFFF;
-background-image:url('PLACEHOLDER.GIF');
-background-color:#B0B0B0;
-width:120px;
-text-align:center;
-padding:4px;
-text-decoration:none;
-text-spacing:8px;
-text-transform:uppercase;
-}
-a:hover,a:active
-{
-background-image:url('PLACEHOLDER.GIF');
-background-color:#A20033;
-text-decoration:none;
-}
-</style>
-<br>
-</head>
+        <div id="right-sidebar"></div>
 
+        <div id="content">
+            <br/>
 
-<ul>
-<li><a href="#home">Home</a></li>
-<li><a href="#help">Help</a></li>
-<li><a href="#cards">Cards</a></li>
-</ul>
-</div>
-<div align=center></font>
-</font></div><!--LEFT SIDEBAR--></div>
-<div id="right-sidebar">
+            <font face="Arial">
 
-</div>
-<div id="content">
-<br>
-<font face="Arial"><div align="center"><font color=#606060><h3>ST. JUDE CARD CREATOR</h3></div></font></font>
-<div align="left"></div>
-<br><br><br><br><br>
-<style>
-body {
-	color: #ccc;
-	font-family: Arial, sans-serif;
-	font-size: 100%;
-	font-weight: bold;	
-    text-align: center;
-}
-.one.inner {
-    width: 500;
-    height: 500;
-    line-height: 10em;
-    background: #ffffff;
- 
-    border-radius: 1em;
-}
- 
-.one.outer {
-	display: inline-block;
-    background: #A20033;
- 
-    padding: 1em;
-    border-radius: 2em;
-}
-</style>
+                <div align="center">
+
+                    <font color=#606060>
+                        <h3>ST. JUDE CARD CREATOR</h3>
+                    </font>
+                </div>
+            </font>
+        </div>
+
+        <br/><br/><br/><br/><br/>
+
+        <div class="one outer">
+            <center>
+                <input type="image" src="Images/Red.png" onClick="colorSelect('#FF0000'); widthSelect(5);" value="Red" />
+                <input type="image" src="Images/Orange.png" onClick="colorSelect('#FF8F45'); widthSelect(5);" value="Orange" />
+                <input type="image" src="Images/Yellow.png" onClick="colorSelect('#f5f009'); widthSelect(5);" value="Yellow" />
+                <input type="image" src="Images/Green.png" onClick="colorSelect('#19A347'); widthSelect(5);" value="Green" />
+                <input type="image" src="Images/Light Blue.png" onClick="colorSelect('#00fffb'); widthSelect(5);" value="Light Blue" />
+                <img src="Images/Transparent 32x32.png"><!--Bucket tool if there's time?--></img><br />
+                <input type="image" src="Images/Blue.png" onClick="colorSelect('#3d66ff'); widthSelect(5);" value="Blue" />
+                <input type="image" src="Images/Purple.png" onClick="colorSelect('#DE7DFF'); widthSelect(5);" value="Purple" />
+                <input type="image" src="Images/Pink.png" onClick="colorSelect('#FF33CC'); widthSelect(5);" value="Pink" />
+                <input type="image" src="Images/Brown.png" onClick="colorSelect('#754719'); widthSelect(5);" value="Brown" />
+                <input type="image" src="Images/Black.png" onClick="colorSelect('#000000'); widthSelect(5);" value="Black" />
+                <input type="image" src="Images/Eraser.png" onClick="colorSelect('#FFFFFF'); widthSelect(60);" value="Eraser" />
+            </center>
+        
+            <div class="one inner">
+                <canvas id="Drawing" width="80%" height="50%" style="border:0px dashed #000000;"></canvas>
+            </div>
+     
+            <div align="center">
+                <br/>
+                <input type="image" src="Images/Submit.png" onClick="saveCanvas();" value="Submit" /> <input type="image" src="Images/Reset.png" onClick="resetCanvas();" value="Reset" />
+                <br />
+                <img id="preview" src="Images/Preview.png" visible="false"/>
+            </div>
+        </div>
+
+        <br/>
+        
+        <marquee id="carousel" style="position: relative; background-color:#FFFFFF" behavior="scroll" align="center" direction="left" scrollamount="2" scrolldelay="5" onmouseover="this.stop()" onmouseout="this.start()" height="200"><br>
+            <!--<center>
+                <a href="http://www.tkqlhce.com/click-2312720-10463747?URL=http://shop.cafepress.com/design/28001964" target="_blank">
+                    <img src="http://www.vegetariansareevil.com/images/eatmeat.jpg" alt="Eat Meat Tee Shirt" title="Tee Shirt " style="position: relative;" border="0">
+                </a><br>
+            </center>-->
+        </marquee>
+
+        <footer>
+            <sup>
+                <font face="Arial", cursive>
+                    <font color=#606060>
+                        <font size=1>Simple HTML Drawing App code Copyright 2010 William Malone (www.williammalone.com)
+                        </font>
+                    </font>
+                </font>
+            </sup>
+        </footer>
+
+        <script type="text/javascript">
+            initCanvasDrawing();
+        </script>
+    </body>
 </html>
-
-
-
-
-
-
-<div class="one outer">
-<center><input type="image" src="Images/Red.png" onClick="colorSelect('#FF0000'); widthSelect(5);" value="Red" />
-<input type="image" src="Images/Orange.png" onClick="colorSelect('#FF8F45'); widthSelect(5);" value="Orange" />
-<input type="image" src="Images/Yellow.png" onClick="colorSelect('#f5f009'); widthSelect(5);" value="Yellow" />
-<input type="image" src="Images/Green.png" onClick="colorSelect('#19A347'); widthSelect(5);" value="Green" />
-<input type="image" src="Images/Light Blue.png" onClick="colorSelect('#00fffb'); widthSelect(5);" value="Light Blue" />
-<img src="Images/Transparent 32x32.png"><!--Bucket tool if there's time?--></img><br />
-<input type="image" src="Images/Blue.png" onClick="colorSelect('#3d66ff'); widthSelect(5);" value="Blue" />
-<input type="image" src="Images/Purple.png" onClick="colorSelect('#DE7DFF'); widthSelect(5);" value="Purple" />
-<input type="image" src="Images/Pink.png" onClick="colorSelect('#FF33CC'); widthSelect(5);" value="Pink" />
-<input type="image" src="Images/Brown.png" onClick="colorSelect('#754719'); widthSelect(5);" value="Brown" />
-<input type="image" src="Images/Black.png" onClick="colorSelect('#000000'); widthSelect(5);" value="Black" />
-<input type="image" src="Images/Eraser.png" onClick="colorSelect('#FFFFFF'); widthSelect(60);" value="Eraser" /></center>
-    <div class="one inner"><canvas id="Drawing" width="80%" height="50%" style="border:0px dashed #000000;"></canvas></div></font><div align="center">
-<br/>
-    <input type="image" src="Images/Submit.png" onClick="saveCanvas();" value="Submit" /> <input type="image" src="Images/Reset.png" onClick="resetCanvas();" value="Reset" />
-    <br />
-    <img id="preview" src="Images/Preview.png" visible="false"/>
-    </div>
-    
-  
-</body>
-
-</div><!--/ inner-->
-</div><!--/ outer-->
-</body><!--CONTENT IN CENTER COLUMN--></div>
-<br>
-    <marquee id="carousel" style="position: relative; background-color:#FFFFFF" behavior="scroll" align="center" direction="left" scrollamount="2" scrolldelay="5" onmouseover="this.stop()" onmouseout="this.start()" height="200"><br>
-        <!--<center>
-            <a href="http://www.tkqlhce.com/click-2312720-10463747?URL=http://shop.cafepress.com/design/28001964" target="_blank">
-                <img src="http://www.vegetariansareevil.com/images/eatmeat.jpg" alt="Eat Meat Tee Shirt" title="Tee Shirt " style="position: relative;" border="0">
-            </a><br>
-        </center>-->
-</marquee>
-<footer><sup><font face="Arial", cursive><font color=#606060><font size=1>Simple HTML Drawing App code Copyright 2010 William Malone (www.williammalone.com)</font></sup></footer>
-<script type="text/javascript">
-    initCanvasDrawing();
-</script>
