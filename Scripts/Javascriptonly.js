@@ -1,7 +1,6 @@
 var canvas;
 var carousel;
 var paint = false;
-var eraser = false;
 var context;
 var urls = [];
 var clickX = new Array();
@@ -36,7 +35,6 @@ function initCanvasDrawing() {
 
         var touches = evt.changedTouches;
         paint = false;
-        eraser = false;
 
         for (var i = 0; i < touches.length; i++) {
             onGoingTouches.splice(i, 1);  // remove it; we're done
@@ -97,106 +95,16 @@ function initCanvasDrawing() {
 
     canvas.addEventListener('mousemove', function (evt) {
         if (paint) {
-            if (!eraser) {
-                var position = getOffsetPosition(canvas, evt);
-                addClick(position, true);
-                redraw();
-            } else {
-                erase(evt);
-            }
+            var position = getOffsetPosition(canvas, evt);
+            addClick(position, true);
+            redraw();
         }
     }, false);
-
-    function erase(evt) {
-        if (paint && eraser) {
-            var offset = strokeWidth / 2;
-            var position = getOffsetPosition(canvas, evt);
-            var top = Math.max(position.y - offset, 0);
-            var bottom = Math.min(position.y + offset, canvas.height);
-            var left = Math.max(position.x - offset, 0);
-            var right = Math.min(position.x + offset, canvas.width);
-
-            console.log('xMin = ' + left + ", xMax = " + right + ',yMin = ' + top + ', yMax = ' + bottom);
-
-            //loop through all x coordinates in order
-            //all arrays are parallel arrays
-            for (var i = 0; i < clickX.length; i++) {
-                var x = clickX[i];
-                var y = clickY[i];
-                var log = [];
-
-                if (x >= left && x <= right //falls into the vertical boundary
-                    && y >= top && y <= bottom) { //falls into the horizontal boundary
-                    var newX = x;
-                    var newY = y;
-
-                    log.push('i = ' + i);
-                    log.push('x = ' + x);
-                    log.push('y = ' + y);
-
-                    var spliceRun = 1;
-
-                    //Follow the path to find other points that live in the boundary and can be collapse
-                    for (var j = i + 1; j < clickX.length - 1; j++)
-                        if (clickX[j] > left && clickX[j] < right //falls into the vertical boundary
-                            && clickY[j] > top && clickY[j] < bottom //falls into the horizontal boundary
-                            && clickDrag[j]) //line between this position and the current position
-                            spliceRun++;
-                        else //the point is not within the boundary or is not connected
-                            break;
-
-                    var spliceX = clickX[j + spliceRun];
-                    var spliceY = clickY[j + spliceRun];
-
-                    if (spliceX <= left) newX = left - 1;
-                    else if (spliceX >= right) newX = right + 1;
-                    if (spliceY <= top) newY = top - 1;
-                    else if (spliceY >= bottom) newY = bottom + 1;
-
-                    log.push('newX = ' + newX);
-                    log.push('newY = ' + newY);
-                    log.push('splice run = ' + spliceRun);
-
-                    clickX[j] = newX; //clickX[j + spliceRun];
-                    clickY[j] = newY; //clickY[j + spliceRun];
-                    clickDrag[j] = clickDrag[j + spliceRun];
-                    clickColor[j] = clickColor[j + spliceRun];
-                    clickBrushShape[j] = clickBrushShape[j + spliceRun];
-                    clickWidth[j] = clickWidth[j + spliceRun];
-
-                    //Move the rest
-                    for (var j = i + spliceRun + 1; j < clickX.length; j++) {
-                        clickX[j] = clickX[j + 1];
-                        clickY[j] = clickY[j + 1];
-                        clickDrag[j] = clickDrag[j + 1];
-                        clickColor[j] = clickColor[j + 1];
-                        clickBrushShape[j] = clickBrushShape[j + 1];
-                        clickWidth[j] = clickWidth[j + 1];
-                    }
-
-
-                    clickX.splice(i + spliceRun > 1 ? 1 : 0, spliceRun);
-                    clickY.splice(i + spliceRun > 1 ? 1 : 0, spliceRun);
-                    clickDrag.splice(i + spliceRun > 1 ? 1 : 0, spliceRun);
-                    clickColor.splice(i + spliceRun > 1 ? 1 : 0, spliceRun);
-                    clickBrushShape.splice(i + spliceRun > 1 ? 1 : 0, spliceRun);
-                    clickWidth.splice(i + spliceRun > 1 ? 1 : 0, spliceRun);
-                    
-                } else
-                    log.push('did not move');
-
-                console.log(log.join(', '));
-            }
-        }
-    }
 
     canvas.addEventListener('mousedown', function (evt) {
         var position = getOffsetPosition(canvas, evt);
         paint = true;
-        if(!eraser)
-            addClick(position);
-        else
-            erase(evt);
+        addClick(position);
         redraw();
     }, false);
 
@@ -251,7 +159,6 @@ function redraw() {
 function resetCanvas() {
     canvas.width = canvas.width;
     paint = false;
-    eraser = false;
     clickX = new Array();
     clickY = new Array();
     clickDrag = new Array();
@@ -329,13 +236,7 @@ function loadList() {
 }
 
 function colorSelect(color) {
-    if (eraser) eraser = false;
     strokeColor = color;
-}
-
-function eraserSelect() {
-    eraser = true;
-    strokeWidth = 60;
 }
 
 function widthSelect(width) {
