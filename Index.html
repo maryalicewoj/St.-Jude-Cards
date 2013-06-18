@@ -1,0 +1,102 @@
+﻿﻿<!-- IE in quirks mode -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.0//EN">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript" src="Scripts/Javascriptonly.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css' />
+        <link href='Content/Cssonly.css' rel='stylesheet' type='text/css' />
+        <title>Make a Card for St.Jude</title>
+    </head>
+
+    <body> 
+        <div id="left-sidebar">
+            <img src="Images/StJudeLogo.jpg" border="0" alt="Image and video hosting by TinyPic ">
+
+            <div align="left"><!--LEFT SIDEBAR-->
+                <br/>
+
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#help">Help</a></li>
+                    <li><a href="#cards">Cards</a></li>
+                </ul>
+            </div>
+        
+            <div align=center></div>
+        </div>
+
+        <div id="right-sidebar"></div>
+
+        <div id="content">
+            <br/>
+
+            <font face="Arial">
+
+                <div align="center">
+
+                    <font color=#606060>
+                        <h3>ST. JUDE CARD CREATOR</h3>
+                    </font>
+                </div>
+            </font>
+        </div>
+
+        <br/><br/><br/><br/><br/>
+
+        <div class="one outer">
+            <center>
+                <input type="image" src="Images/Red.png" onClick="colorSelect('#FF0000'); widthSelect(5);" value="Red" />
+                <input type="image" src="Images/Orange.png" onClick="colorSelect('#FF8F45'); widthSelect(5);" value="Orange" />
+                <input type="image" src="Images/Yellow.png" onClick="colorSelect('#f5f009'); widthSelect(5);" value="Yellow" />
+                <input type="image" src="Images/Green.png" onClick="colorSelect('#19A347'); widthSelect(5);" value="Green" />
+                <input type="image" src="Images/Light Blue.png" onClick="colorSelect('#00fffb'); widthSelect(5);" value="Light Blue" />
+                <img src="Images/Transparent 32x32.png"><!--Bucket tool if there's time?--></img><br />
+                <input type="image" src="Images/Blue.png" onClick="colorSelect('#3d66ff'); widthSelect(5);" value="Blue" />
+                <input type="image" src="Images/Purple.png" onClick="colorSelect('#DE7DFF'); widthSelect(5);" value="Purple" />
+                <input type="image" src="Images/Pink.png" onClick="colorSelect('#FF33CC'); widthSelect(5);" value="Pink" />
+                <input type="image" src="Images/Brown.png" onClick="colorSelect('#754719'); widthSelect(5);" value="Brown" />
+                <input type="image" src="Images/Black.png" onClick="colorSelect('#000000'); widthSelect(5);" value="Black" />
+                <input type="image" src="Images/Eraser.png" onClick="colorSelect('#FFFFFF'); widthSelect(40);" value="Eraser" />
+            </center>
+        
+            <div class="one inner">
+                <canvas id="Drawing" width="80%" height="50%" style="border:0px dashed #000000;"></canvas>
+            </div>
+     
+            <div align="center">
+                <br/>
+                <input type="image" src="Images/Submit.png" onClick="saveCanvas();" value="Submit" /> <input type="image" src="Images/Reset.png" onClick="resetCanvas();" value="Reset" />
+                <br />
+                <img id="preview" src="Images/Preview.png" visible="false"/>
+            </div>
+        </div>
+
+        <br/>
+        
+        <marquee id="carousel" style="position: relative; background-color:#FFFFFF" behavior="scroll" align="center" direction="left" scrollamount="2" scrolldelay="5" onmouseover="this.stop()" onmouseout="this.start()" height="200"><br>
+            <!--<center>
+                <a href="http://www.tkqlhce.com/click-2312720-10463747?URL=http://shop.cafepress.com/design/28001964" target="_blank">
+                    <img src="http://www.vegetariansareevil.com/images/eatmeat.jpg" alt="Eat Meat Tee Shirt" title="Tee Shirt " style="position: relative;" border="0">
+                </a><br>
+            </center>-->
+        </marquee>
+
+        <footer>
+            <sup>
+                <font face="Arial", cursive>
+                    <font color=#606060>
+                        <font size=1>Simple HTML Drawing App code Copyright 2010 William Malone (www.williammalone.com)
+                        </font>
+                    </font>
+                </font>
+            </sup>
+        </footer>
+
+        <script type="text/javascript">
+            initCanvasDrawing();
+        </script>
+    </body>
+</html>
