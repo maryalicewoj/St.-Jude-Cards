@@ -14,7 +14,7 @@ users_table = Table('users', metadata,
 	Column('userName', String),
 	Column('password', String),
 	Column('sex', String),
-	Column('patient', String), #can I change this to a true or fase format?
+	Column('patient', String), 
 	Column('age', Integer, nullable=False), # Range of Values .... I have it set up so that it is optional
 	)
  
