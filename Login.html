@@ -1,5 +1,61 @@
 <html>
-<sup><font face="Arial", cursive><font color=#606060><font size=5>Create an Account</font></sup>
+<div align=center>
+<div id="content" style: width=300px>
+<!-- IE in quirks mode -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.0//EN">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript" src="Scripts/Javascriptonly.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css' />
+        <link href='Content/Cssonly.css' rel='stylesheet' type='text/css' />
+        <title>Register | Make a Card for St.Jude</title>
+    </head>
+
+    <body> 
+        <div id="left-sidebar">
+            <img src="Images/StJudeLogo.jpg" border="0" alt="Image and video hosting by TinyPic ">
+
+            <div align="left"><!--LEFT SIDEBAR-->
+                <br/>
+                <ul>
+				<!---Sidebar looks different on this page than canvas page by a few px.  Needs to be fixed.-->
+                    <li><a href="#home">Home</a></li>
+                    <!--<li><a href="#help">Help</a></li>
+                    <li><a href="#cards">Cards</a></li>-->
+                </ul>
+            </div>
+        
+            <div align=center></div>
+        </div>
+
+        <div id="right-sidebar"></div>
+
+        <div id="content">
+            <br/>
+
+            <font face="Arial">
+
+                <div align="center">
+
+                    <font color=#606060>
+                        <h3>ST. JUDE CARD CREATOR</h3>
+                    </font>
+                </div>
+            </font>
+        </div>
+
+        <br/><br/><br/><br/><br/>
+
+        <div class="one outer">
+            <center>
+                <div id="header" style="background-color:#FFFFFF;">
+<h1 style="margin-bottom:0;"><sup><font face="Arial", cursive><font color=#606060><font size=5><b>Create an Account</b></font></sup></h1><font size=1>(all fields required)</font></div>
+<!---My goal is to keep the widths constant between the canvas's div and the registration box, and, so far, that is not working...--->
+<!---Should this become 2-column how a lot of webpages are w/ the registration box on one side of the maroon-colored div and the log-in box on the other?-->
+<div id="content" style="background-color:#FFFFFF;height:250px;width:400px;padding:25px;float:center;">
+<div align=left>
 <form name="input" action="/html_form_action.asp" method="POST">
 	<!--Action sends to server... at the moment to html_form_action.asp.... is this what we want??? -->
 <p>
@@ -12,36 +68,41 @@ Username: <input type="text" name="userName"><br>
 Password: <input type="password" name="pwd"><br>
 </p>
 
-<p>
-<input type="radio" name="sex" value="Female">Female<br>
-<input type="radio" name="sex" value="Male">Male<br>
+<b>Gender:
+<input type="radio" name="sex" value="female">Female
+<input type="radio" name="sex" value="male">Male<br>
 </p>
 
 <!--Patient or Card Maker-->
 <p>
-<input type="radio" name="job" value="Patient">Patient<br>
-<input type="radio" name="job" value="Card Maker">Card Maker<br>
-</p>
+<b>I am a...
+<input type="radio" name="job" value="patient">patient
+<input type="radio" name="job" value="card maker">card maker.</p>
 
 <!--Age Selection *********Only should see if the patient box is checked-->
 <!--Should this be an option, what about that law about users under the age of 13....-->
+<!---Mary here.  We would need to have a parent/guardian e-mail box appear for if any age under 13 is checked, as per COPPA.-->  
+<!---Also, I think COPPA was just updated.  I'll check to see if any of the new legislation applies...--->
 <p>
 <!-- Can't seem to put label -->
 <!-- JMH the name is for finding the control and not for labeling.
     You'll have to add the text in front of the tag for a label. I also suggest a descriptive default like below. -->
-<select name="age">
-<option selected="true" disabled="true">Select your age</option>
-<option value="0-3">0-3</option>
-<option value="4-7">4-7</option>
-<option value="8-11">8-11</option>
-<option value="12-15">12-15</option>
-<option value="16-19">16-19</option>
-<option value="20+">20+</option>
-</select>
-</p>
-
-<!--Submit Button -->
-<input type="submit" value="Submit">
-</form>
-
+<b>I am <select name="age">
+<option selected="true" disabled="true">select your age</option>
+<option value="0-4">0-4</option>
+<option value="5-8">5-8</option>
+<option value="9-12">9-12</option>
+<option value="13-17">13-17</option>
+<option value="18+">18+</option>
+</select><b> years old.
+<br><br><br>
+</div></div>
+</p><!--Submit Button -->
+<input type="image" src="Images/Submit.png" value="Submit" />
+</form></div>
+<p>
+</div>
+            </center>
+        <br/>
+    </body>
 </html>
