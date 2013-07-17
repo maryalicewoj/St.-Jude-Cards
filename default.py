@@ -1,10 +1,8 @@
-from flask import flask, render_template
+import os
+from flask import Flask
 
-APP = Flask(__name__)
+app = Flask(__name__)
 
-@APP.route("/")
-def show_index():
-    return render_template('Homepage.html')
-
-if __name__ == "__main__":
-    APP.run(host='0.0.0.0, port=int(environ["PORT"]))
+@app.route('/')
+def hello():
+    return 'Hello World!'
