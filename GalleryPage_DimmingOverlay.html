@@ -1,0 +1,98 @@
+﻿<html>
+    <!-- IE in quirks mode -->
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.0//EN">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    
+    <!--Gallery example from http://highslide.com/examples/gallery-in-page.html -->
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript" src="Scripts/Javascriptonly.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css' />
+        <!--<link href='Content/Cssonly.css' rel='stylesheet' type='text/css' />-->
+        <title>Gallery | Make a Card for St.Jude</title>
+        
+        <!-- this is for highslide, what we will use for images-->
+        <script type="text/javascript" src="scripts/highslide/highslide-with-gallery.js"></script>
+        <link href="Content/highslide/highslide.css" rel="stylesheet" type="text/css"/>        
+        <script type="text/javascript">
+            // override Highslide settings here
+            // instead of editing the highslide.js file
+            hs.graphicsDir = 'images/highslide/';
+            hs.align = 'center';
+            hs.transitions = ['expand', 'crossfade'];
+            hs.outlineType = 'rounded-white';
+            hs.fadeInOut = true;
+            hs.numberPosition = 'caption';
+            hs.dimmingOpacity = 0.75;
+
+            // Add the controlbar
+            if (hs.addSlideshow) hs.addSlideshow({
+                //slideshowGroup: 'group1',
+                interval: 5000,
+                repeat: false,
+                useControls: true,
+                fixedControls: 'fit',
+                overlayOptions: {
+                    opacity: .75,
+                    position: 'bottom center',
+                    hideOnMouseOut: true
+                }
+            });
+        </script>
+        
+        <style type="text/css">
+            .highslide img {cursor: url(Images/highslide/zoomin.cur), pointer !important;}
+            .highslide-viewport-size {position: fixed; width: 100%; height: 100%; left: 0; top: 0}
+        </style>
+    </head>
+
+    <body> 
+        <div id="left-sidebar" style="display: inline-block; float: left;">
+            <img src="Images/StJudeLogo.jpg" border="0" alt="St. Jude">
+          
+            <div style="display: inline-block; float: left;"><!--LEFT SIDEBAR-->
+                <br/>
+
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <!--<li><a href="#help">Help</a></li>-->
+                    <li><a href="#cards">Gallery</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+        
+        <div id="content" style="display: inline-block">
+            <br/>
+            <!--Center this-->
+            <div style="font-family: Arial; color: #606060; text-align: center">
+                <h3>Gallery Page</h3>
+            </div>
+            <div id="highslide-gallery">
+            
+                <!--First slide in the list must have an id of thumb1 or you need to change the styling-->
+                <a id="thumb1" class="highslide" href="Images/StJudeLogo.jpg" onclick="return hs.expand(this);">
+                    <img src="Images/StJudeLogo.jpg" alt=""/>
+                </a>
+                <div class="highslide-caption">Caption for the first image. This caption can be styled using CSS.</div>
+
+                
+                <div class="hidden-container">
+                    <a class="highslide" href="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQopJbH0D5IlIYQwQ3iBL4RnA4Dqk0s8csW-jZnfhF6twUuceA0" onclick="return hs.expand(this, {thumbnailId: 'thumb1'});">
+                        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQopJbH0D5IlIYQwQ3iBL4RnA4Dqk0s8csW-jZnfhF6twUuceA0" alt=""/>
+                    </a>
+                    <div class="highslide-caption">Caption for the second image. This caption can be styled using CSS.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="right-sidebar" style="display: inline-block; float: right; padding-right:8%; padding-top:20%;">  <!--Mary, can you move the button in and down a little?-->
+            <input type="button" value=" Print " onclick="window.print(); return false;" />
+            <!--JS needs edited so it doesn't print the whole page, just the card, but it's a start--->
+            <!--needs to link to a page that loops through the pictures and puts them inside a check box-->
+        </div>
+    </body>
+</html>
+
