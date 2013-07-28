@@ -1,75 +1,177 @@
 ﻿<html>
-<!-- this is for highslide, what we will use for images-->
-<script type="text/javascript" src="scripts/highslide/highslide.js"></script>
-<script type="text/javascript">
-    // override Highslide settings here
-    // instead of editing the highslide.js file
-    hs.graphicsDir = 'images/highslide/graphics/';
-</script>
-    <!--
-        here is the markup for an image... i am assuming that we are going to have to 
+    <!-- IE in quirks mode -->
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5.0//EN">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    
+    <!--Gallery example from http://highslide.com/examples/gallery-in-page.html -->
 
-        <a href="images/full-image.jpg" class="highslide"
-           onclick="return hs.expand(this)">
-            <img src="images/thumbnail.jpg" alt="Highslide JS"
-                 title="Click to enlarge" height="120" width="107" /></a> 
-        -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript" src="Scripts/Javascriptonly.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css' />
+        <!--<link href='Content/Cssonly.css' rel='stylesheet' type='text/css' />-->
+        <title>Gallery | Make a Card for St.Jude</title>
+        
+        <!-- this is for highslide, what we will use for images-->
+        <script type="text/javascript" src="scripts/highslide/highslide-full.js"></script>
+        <link href="Content/highslide/highslide.css" rel="stylesheet" type="text/css"/>        
+        <script type="text/javascript">
+            // override Highslide settings here
+            // instead of editing the highslide.js file
+            hs.graphicsDir = 'images/highslide/';
+            hs.transitions = ['expand', 'crossfade'];
+            hs.restoreCursor = null;
+            hs.lang.restoreTitle = 'Click for the next image';
 
- <head>
-     <link rel="stylesheet" type="text/css" href="content/highslide/highslide.css" />
-     
-     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-     <script type="text/javascript" src="Scripts/Javascriptonly.js"></script>
-     <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css' />
-     <link href='Content/Cssonlygallery.css' rel='stylesheet' type='text/css' />
-     <title>Gallery Page</title>
- </head>
+            // Add the slideshow providing the controlbar and the thumbstrip
+            hs.addSlideshow({
+                // slideshowGroup: 'group1',
+                interval: 5000,
+                repeat: true,
+                useControls: true,
+                overlayOptions: {
+                    position: 'bottom right',
+                    offsetY: 50
+                },
+                thumbstrip:
+                {
+                    position: 'above',
+                    mode: 'horizontal',
+                    relativeTo: 'expander'
+                }});
+
+            // Options for the in-page items
+            var inPageOptions = {
+                //slideshowGroup: 'group1',
+                outlineType: null,
+                allowSizeReduction: false,
+                wrapperClassName: 'in-page controls-in-heading',
+                thumbnailId: 'gallery-area',
+                useBox: true,
+                width: 600,
+                height: 400,
+                targetX: 'gallery-area 10px',
+                targetY: 'gallery-area 10px',
+                captionEval: 'this.a.title',
+                numberPosition: 'caption'
+            };
+
+            // Open the first thumb on page load
+            hs.addEventListener(window, 'load', function () {
+                document.getElementById('thumb1').onclick();
+            });
+
+            // Cancel the default action for image click and do next instead
+            hs.Expander.prototype.onImageClick = function() {
+                if (/in-page/.test(this.wrapper.className)) return hs.next();
+            };
+
+            // Under no circumstances should the static popup be closed
+            hs.Expander.prototype.onBeforeClose = function() {
+                if (/in-page/.test(this.wrapper.className)) return false;
+            };
+            // ... nor dragged
+            hs.Expander.prototype.onDrag = function() {
+                if (/in-page/.test(this.wrapper.className)) return false;
+            };
+
+            // Keep the position after window resize
+            hs.addEventListener(window, 'resize', function () {
+                var i, exp;
+                hs.getPageSize();
+
+                for (i = 0; i < hs.expanders.length; i++) {
+                    exp = hs.expanders[i];
+                    if (exp) {
+                        var x = exp.x,
+                            y = exp.y;
+
+                        // get new thumb positions
+                        exp.tpos = hs.getPosition(exp.el);
+                        x.calcThumb();
+                        y.calcThumb();
+
+                        // calculate new popup position
+                        x.pos = x.tpos - x.cb + x.tb;
+                        x.scroll = hs.page.scrollLeft;
+                        x.clientSize = hs.page.width;
+                        y.pos = y.tpos - y.cb + y.tb;
+                        y.scroll = hs.page.scrollTop;
+                        y.clientSize = hs.page.height;
+                        exp.justify(x, true);
+                        exp.justify(y, true);
+
+                        // set new left and top to wrapper and outline
+                        exp.moveTo(x.pos, y.pos);
+                    }
+                }
+            });
+        </script>
+        
+        <style type="text/css">
+            .highslide-image {
+                border: 1px solid black;
+            }
+            .highslide-controls {
+                width: 90px !important;
+            }
+            .highslide-controls .highslide-close {
+                display: none;
+            }
+            .highslide-caption {
+                padding: .5em 0;
+            }
+        </style>
+        
+        <style type="text/css">
+            .highslide img {cursor: url(Images/highslide/zoomin.cur), pointer !important;}
+            .highslide-viewport-size {position: fixed; width: 100%; height: 100%; left: 0; top: 0}
+        </style>
+    </head>
 
     <body> 
-        <div id="left-sidebar">
-            <img src="http://i41.tinypic.com/2wd98vs.jpg" border="0" alt="Image and video hosting by TinyPic ">
-
-            <div align="left"><!--LEFT SIDEBAR-->
+        <div id="left-sidebar" style="display: inline-block; float: left;">
+            <img src="Images/StJudeLogo.jpg" border="0" alt="St. Jude">
+          
+            <div style="display: inline-block; float: left;"><!--LEFT SIDEBAR-->
                 <br/>
 
                 <ul>
                     <li><a href="#home">Home</a></li>
-                   <!--<li><a href="#help">Help</a></li>-->
+                    <!--<li><a href="#help">Help</a></li>-->
                     <li><a href="#cards">Gallery</a></li>
                 </ul>
+
             </div>
-        
-            <div align=center></div>
+
         </div>
-
-        <div id="right-sidebar"></div>
-
-        <div id="content">
+        
+        <div id="content" style="display: inline-block">
             <br/>
+            <!--Center this-->
+            <div style="font-family: Arial; color: #606060; text-align: center">
+                <h3>Gallery Page</h3>
+            </div>
+            <div id="gallery-area">
+            
+                <!--First slide in the list must have an id of thumb1 or you need to change the styling-->
+                <div class="hidden-container">
+                    <a id="thumb1" class="highslide" href="Images/StJudeLogo.jpg" onclick="return hs.expand(this, inPageOptions);">
+                        <img src="Images/StJudeLogo.jpg" alt=""/>
+                    </a>
 
-            <font face="Arial">
-
-                <div align="center">
-
-                    <font color=#606060>
-                        <h3>Gallery Page</h3>
-                    </font>
+                    <a class="highslide" href="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQopJbH0D5IlIYQwQ3iBL4RnA4Dqk0s8csW-jZnfhF6twUuceA0" onclick="return hs.expand(this, inPageOptions);">
+                        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQopJbH0D5IlIYQwQ3iBL4RnA4Dqk0s8csW-jZnfhF6twUuceA0" alt=""/>
+                    </a> 
                 </div>
-            </font>
+            </div>
         </div>
-
-        <br/><br/><br/><br/><br/><br/>
-
         
-        
-        <marquee id="carousel" style="position: relative; background-color:#FFFFFF" behavior="scroll" align="center" direction="left" scrollamount="2" scrolldelay="5" onmouseover="this.stop()" onmouseout="this.start()" height="500" width = "700"><br>
-            <center>
-                <a href="http://www.tkqlhce.com/click-2312720-10463747?URL=http://shop.cafepress.com/design/28001964" target="_blank">
-                    <img src="http://www.vegetariansareevil.com/images/eatmeat.jpg" alt="Eat Meat Tee Shirt" title="Tee Shirt " style="position: relative;" border="0">
-                </a><br>
-            </center>-->
-        </marquee>
-
-        </script>
+        <div id="right-sidebar" style="display: inline-block; float: right; padding-right:8%; padding-top:20%;">  <!--Mary, can you move the button in and down a little?-->
+            <input type="button" value=" Print " onclick="window.print(); return false;" />
+            <!--JS needs edited so it doesn't print the whole page, just the card, but it's a start--->
+            <!--needs to link to a page that loops through the pictures and puts them inside a check box-->
+        </div>
     </body>
 </html>
+

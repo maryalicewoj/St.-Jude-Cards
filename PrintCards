@@ -1,0 +1,65 @@
+<html>
+<!-- this is for highslide, what we will use for images-->
+<script type="text/javascript" src="scripts/highslide/highslide.js"></script>
+<script type="text/javascript">
+    // override Highslide settings here
+    // instead of editing the highslide.js file
+    hs.graphicsDir = 'images/highslide/graphics/';
+</script>
+ <head>
+     <link rel="stylesheet" type="text/css" href="content/highslide/highslide.css" />
+     
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <script type="text/javascript" src="Scripts/Javascriptonly.js"></script>
+     <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css' />
+     <link href='Content/Cssonlygallery.css' rel='stylesheet' type='text/css' />
+     <title>Gallery Page</title>
+ </head>
+
+    <body> 
+        <div id="left-sidebar">
+            <img src="http://i41.tinypic.com/2wd98vs.jpg" border="0" alt="Image and video hosting by TinyPic ">
+          
+
+            <div align="left"><!--LEFT SIDEBAR-->
+                <br/>
+
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                   <!--<li><a href="#help">Help</a></li>-->
+                    <li><a href="#cards">Gallery</a></li>
+                </ul>
+
+            </div>
+
+            <div align=center></div>
+        </div>
+
+        <div id="right-sidebar">  <!--Mary, can you move the button in and down a little?-->
+            <button type="button">Back to Gallery</button><!--needs to link to the gallery page-->
+        </div>
+
+        <div id="content">
+            <br/>
+
+            <font face="Arial">
+
+                <div align="center">
+
+                    <font color=#606060>
+                        <h3>Print Cards</h3>
+                    </font>
+                </div>
+            </font>
+        </div>
+            <center>
+               <!--put highslide here-->
+            </center>
+        </marquee>
+
+        </script>
+    </body>
+    <footer>
+        <button type="button">Print</button> <!--print dialog comes up... think about specific printer at st.jude-->
+    </footer>
+</html>
